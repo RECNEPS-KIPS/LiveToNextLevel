@@ -18,11 +18,13 @@ public class Spawner : MonoBehaviour {
     float nextCheckTime;//下一次检测时间
     Vector3 lastCampPos;//上一次玩家长时间停留的位置
     bool isCamp;
+    bool isDisable;
 
     private int aliveEnemies;//剩余存活的敌人
     //public event System.Action<int> OnNewWave;
     void Start() {
         player = FindObjectOfType<Player>();//获取玩家
+        player.OnDeath += OnPlayerDeath;//订阅玩家死亡事件
         playerTrs = player.transform;
 
         nextCheckTime = timeBetweenCheck + Time.time;
@@ -34,18 +36,20 @@ public class Spawner : MonoBehaviour {
     }
 
     void Update() {
-        //到达玩家静止检测时间点
-        if (Time.time > nextCheckTime) {
-            nextCheckTime = Time.time + timeBetweenCheck;
-            //若玩家距离上次静止的位置小于检测距离,即玩家移动的距离在一定时间段过于小
-            isCamp = Vector3.Distance(playerTrs.position, lastCampPos) < campMoveDistance;
-            lastCampPos = playerTrs.position;
-        }
-        //剩余需要生成的敌人数大于0,当前时间满足生成时间
-        if (remainEnemiesToSpawn > 0 && Time.time > nextSpawnTime) {
-            remainEnemiesToSpawn--;
-            nextSpawnTime = Time.time + curWave.timeBetweenSpawns;//为下一次生成时间赋值
-            StartCoroutine(SpawnerEnemy());//生成敌人
+        if (!isDisable) {
+            //到达玩家静止检测时间点
+            if (Time.time > nextCheckTime) {
+                nextCheckTime = Time.time + timeBetweenCheck;
+                //若玩家距离上次静止的位置小于检测距离,即玩家移动的距离在一定时间段过于小
+                isCamp = Vector3.Distance(playerTrs.position, lastCampPos) < campMoveDistance;
+                lastCampPos = playerTrs.position;
+            }
+            //剩余需要生成的敌人数大于0,当前时间满足生成时间
+            if (remainEnemiesToSpawn > 0 && Time.time > nextSpawnTime) {
+                remainEnemiesToSpawn--;
+                nextSpawnTime = Time.time + curWave.timeBetweenSpawns;//为下一次生成时间赋值
+                StartCoroutine(SpawnerEnemy());//生成敌人
+            }
         }
     }
 
@@ -88,6 +92,10 @@ public class Spawner : MonoBehaviour {
         if (aliveEnemies == 0) {
             NextWave();
         }
+    }
+
+    void OnPlayerDeath() {
+        isDisable = true;
     }
 
     /// <summary>

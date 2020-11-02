@@ -195,9 +195,9 @@ public class MapGenerator : MonoBehaviour {
     /// <returns>地图贴片</returns>
     public Transform GetTileFromPosition(Vector3 pos) {
         int x = Mathf.RoundToInt(pos.x / tileSize + (currentMap.mapSize.x - 1) / 2f);
-        x = Mathf.Clamp(x, 0, tileMap.GetLength(0));
+        x = Mathf.Clamp(x, 0, tileMap.GetLength(0) - 1);
         int y = Mathf.RoundToInt(pos.z / tileSize + (currentMap.mapSize.y - 1) / 2f);
-        y = Mathf.Clamp(y, 0, tileMap.GetLength(1));
+        y = Mathf.Clamp(y, 0, tileMap.GetLength(1) - 1);
         return tileMap[x, y];
     }
 
