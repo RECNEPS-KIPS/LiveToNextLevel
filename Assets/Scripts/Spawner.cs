@@ -115,6 +115,7 @@ public class Spawner : MonoBehaviour {
             if (OnNewWave != null) {
                 OnNewWave(curWaveNum);
             }
+            ResetPlayerPos();//重置玩家位置
         }
     }
 
