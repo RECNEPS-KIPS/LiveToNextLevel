@@ -20,7 +20,42 @@ public static class Utils {
             list[randomIndex] = list[i];
             list[i] = tempItem;
         }
-
         return list;
+    }
+
+    /// <summary>
+    /// 查找对象
+    /// </summary>
+    /// <param name="root"></param>
+    /// <param name="name"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static T FindObj<T>(Transform root, string name) {
+        Transform target = GetChild(root, name);
+        T res = target.GetComponent<T>();
+        return res;
+    }
+
+    /// <summary>
+    /// 递归查找父节点下的对象
+    /// </summary>
+    /// <param name="root">根节点</param>
+    /// <param name="childName">目标名称</param>
+    /// <returns></returns>
+    private static Transform GetChild(Transform root, string childName) {
+        //根节点查找
+        Transform childTF = root.Find(childName);
+        if (childTF != null) {
+            return childTF;
+        }
+        //遍历子物体查找
+        int count = root.childCount;
+        for (int i = 0; i < count; i++) {
+            childTF = GetChild(root.GetChild(i), childName);
+            if (childTF != null) {
+                return childTF;
+            }
+        }
+        return null;
     }
 }
