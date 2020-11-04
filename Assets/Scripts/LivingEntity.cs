@@ -38,6 +38,7 @@ public class LivingEntity : MonoBehaviour, IDamageable {
     /// <summary>
     /// 处理死亡
     /// </summary>
+    [ContextMenu("DestroySelf")]
     public void Die() {
         //print("die");
         dead = true;
