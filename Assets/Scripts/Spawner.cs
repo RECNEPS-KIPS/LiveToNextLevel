@@ -19,6 +19,7 @@ public class Spawner : MonoBehaviour {
     Vector3 lastCampPos;//上一次玩家长时间停留的位置
     bool isCamp;
     bool isDisable;
+    public event System.Action<int> OnNewWave;
 
     private int aliveEnemies;//剩余存活的敌人
     //public event System.Action<int> OnNewWave;
@@ -109,6 +110,11 @@ public class Spawner : MonoBehaviour {
 
             remainEnemiesToSpawn = curWave.enemyCount;
             aliveEnemies = remainEnemiesToSpawn;
+
+            //开始下一波,生成新地图
+            if (OnNewWave != null) {
+                OnNewWave(curWaveNum);
+            }
         }
     }
 

@@ -24,6 +24,17 @@ public class MapGenerator : MonoBehaviour {
 
     void Start() {
         GenerateMap();
+        FindObjectOfType<Spawner>().OnNewWave += OnNewWave;//订阅下一波敌人事件,生成新的地图
+    }
+
+    /// <summary>
+    /// 生成新的地图
+    /// </summary>
+    /// <param name="curWaveNum"></param>
+    public void OnNewWave(int curWaveNum) {
+        mapIndex = curWaveNum - 1;
+        print(mapIndex);
+        GenerateMap();
     }
 
     /// <summary>
