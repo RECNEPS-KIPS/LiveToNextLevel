@@ -118,6 +118,13 @@ public class Spawner : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// 重置玩家位置,将玩家放置到地图中心,防止生成的新地图过小,玩家位于地图边界外
+    /// </summary>
+    public void ResetPlayerPos() {
+        playerTrs.position = map.GetTileFromPosition(Vector3.zero).position + new Vector3(0, 0.1f, 0);
+    }
+
     [System.Serializable]
     //波数对象
     public class Wave {
