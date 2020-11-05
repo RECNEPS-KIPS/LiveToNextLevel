@@ -19,5 +19,29 @@ Physics.OverlapSphere(transform.position, 0.1f, collisionMask);
 //layerMask 在某个Layer层上进行碰撞体检索,例如当前选中Player层,则只会返回周围半径内 Layer标示为Player的GameObject的碰撞体集合
 //返回值:Collider[];//排好序的数据,索引越大说明目标碰撞体距离监测点越远
 ```    
+###### <2>Rigidbody刚体的AddForce方法和AddTorque
+```csharp
+public void AddForce(Vector3 force, ForceMode mode = ForceMode.Force);
+// 功能:对刚体施加一个直线方向的力 
+// 参数介绍:
+// force 决定力的方向和大小
+// mode 决定作用力的模式,缺省方式为ForceMode.Force
+
+public void AddTorque(Vector3 torque, ForceMode mode = ForceMode.Force);
+// 功能:对刚体施加一个旋转力
+// 参数介绍:
+// torque 决定旋转力的大小和旋转轴的方向,旋转方向参照左手定则
+// mode 决定作用力的模式,缺省方式为ForceMode.Force
+
+// 参数ForceMode枚举类型
+// 功能:力的作用方式 枚举类型,有四个枚举成员
+// 计算公式:    Ft = mv(t) 即 v(t) = Ft/m
+// (1)ForceMode.Force : 持续施加一个力,与重力mass有关,t = 每帧间隔时间,m = mass
+// (2)ForceMode.Impulse : 瞬间施加一个力,与重力mass有关,t = 1.0f,m = mass
+// (3)ForceMode.Acceleration:持续施加一个力,与重力mass无关,t = 每帧间隔时间,m = 1.0f
+// (4)ForceMode.VelocityChange:瞬间施加一个力,与重力mass无关,t = 1.0f,m = 1.0f
+
+```    
+###### <3>Random.insideUnitSphere 返回单位球内一个随机点(only read)
 ##### 机制:
 ###### <1>类挂机检测:玩家长时间在某一处静止不动,或者攻击时持续逗留在某地超过一定时间被检测到,在玩家附近生成敌人,增加紧张感
