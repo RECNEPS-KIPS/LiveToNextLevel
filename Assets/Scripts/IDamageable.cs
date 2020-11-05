@@ -5,6 +5,6 @@ using UnityEngine;
 /// //Damage接口
 /// </summary>
 public interface IDamageable {
-    void TakeHit(float damage, RaycastHit hit);//受击
+    void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDir);//受击
     void TakeDamage(float damage);//受击
 }

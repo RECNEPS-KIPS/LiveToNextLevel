@@ -27,12 +27,16 @@ public class Enemy : LivingEntity {
 
     private LivingEntity targetEntity;
     private bool hasTarget;
+    public ParticleSystem deathEffect;
 
     protected override void Start() {
         base.Start();
         pathFinder = GetComponent<NavMeshAgent>();//寻路组件
         mat = GetComponent<Renderer>().material;
         oriColor = mat.color;//初始颜色
+
+        deathEffect = Resources.Load<ParticleSystem>("Prefabs/Effects/EnemyDeathEffect");
+
         //场景中有存活的玩家
         if (GameObject.FindGameObjectWithTag("Player") != null) {
             hasTarget = true;
@@ -56,6 +60,14 @@ public class Enemy : LivingEntity {
     void OnTargetDeath() {
         hasTarget = false;
         curState = State.Idle;
+    }
+
+    public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDir) {
+        if (damage >= HP) { //创建死亡特效
+            GameObject effectObj = GameObject.Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDir));
+            Destroy(effectObj, deathEffect.startLifetime);
+        }
+        base.TakeHit(damage, hitPoint, hitDir);
     }
 
     // Update is called once per frame

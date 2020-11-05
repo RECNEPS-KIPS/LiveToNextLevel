@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour {
         speed = newSpeed;
         Collider[] nearColliders = Physics.OverlapSphere(transform.position, 0.2f, collisionMask);//检测附近有无敌人
         if (nearColliders.Length > 0) {
-            OnHitObject(nearColliders[0]);//damage 第一个(最近的敌人)
+            OnHitObject(nearColliders[0], transform.position);//damage 第一个(最近的敌人)
         }
     }
     // Update is called once per frame
@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour {
         RaycastHit hit;
         //与trigger的碰撞也要触发,加上QueryTriggerInteraction.Collide
         if (Physics.Raycast(ray, out hit, moveDistance + skinWidth, collisionMask, QueryTriggerInteraction.Collide)) {
-            OnHitObject(hit);
+            OnHitObject(hit.collider, hit.point);
         }
     }
 
@@ -51,8 +51,8 @@ public class Bullet : MonoBehaviour {
         //print(hit.transform.gameObject.name);
         IDamageable damageObject = hit.collider.GetComponent<IDamageable>();
         if (damageObject != null) {
-            //print("hit");
-            damageObject.TakeHit(damage, hit);
+            //print("hit");s
+            damageObject.TakeDamage(damage);
         }
         GameObject.Destroy(this.gameObject);
     }
@@ -61,11 +61,11 @@ public class Bullet : MonoBehaviour {
     /// 重写碰撞触发方法
     /// </summary>
     /// <param name="collider"></param>
-    void OnHitObject(Collider collider) {
-        IDamageable damageObject = collider.GetComponent<IDamageable>();
-        if (damageObject != null) {
-            damageObject.TakeDamage(damage);
+    void OnHitObject(Collider collider, Vector3 hitPoint) {
+        IDamageable damageableObject = collider.GetComponent<IDamageable>();
+        if (damageableObject != null) {
+            damageableObject.TakeHit(damage, hitPoint, transform.forward);
         }
-        GameObject.Destroy(this.gameObject);
+        GameObject.Destroy(gameObject);
     }
 }

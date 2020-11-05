@@ -29,8 +29,9 @@ public class LivingEntity : MonoBehaviour, IDamageable {
     /// 扩展的生命体受击函数
     /// </summary>
     /// <param name="damage">伤害值</param>
-    /// <param name="hit">伤害来源</param>
-    public void TakeHit(float damage, RaycastHit hit) {
+    /// <param name="hitPoint">击中点</param>
+    /// <param name="hitDir">击中方向</param>
+    public virtual void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDir) {
         //print("hit2");
         TakeDamage(damage);
     }
