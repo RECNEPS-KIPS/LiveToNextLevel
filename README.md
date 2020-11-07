@@ -49,3 +49,5 @@ public void AddTorque(Vector3 torque, ForceMode mode = ForceMode.Force);
 ##### 问题:
 ###### <1>:获取物体的Renderer组件的material.color属性的Alpha通道值来改变预制体的颜色透明度,必须将material的(Renderring Mode)渲染模式
 ###### 修改为Fade模式
+###### <2>:VsCode无法自动引用脚本命名空间导致编译器报错的解决方案,工程中删掉Assembly-CSharp.csproj文件,Unity中首选项中将编译器设置为
+###### Visual Studio,重新生成所有的csproj文件(Regenerate all csproj files),再将默认编译器切换为VsCode

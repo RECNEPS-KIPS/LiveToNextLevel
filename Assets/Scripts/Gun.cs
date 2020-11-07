@@ -11,7 +11,9 @@ public class Gun : MonoBehaviour {
     public Transform shell;//弹壳
     public Transform shellSpawner;//弹壳弹出点
     private float nextShotTime;
+    public MuzzleFlash muzzleFlash;
     void Start() {
+        muzzleFlash = GetComponent<MuzzleFlash>();
         bullet = Resources.Load<GameObject>("Prefabs/Bullet").GetComponent<Bullet>();
         shell = Resources.Load<GameObject>("Prefabs/Shell").transform;
     }
@@ -31,6 +33,7 @@ public class Gun : MonoBehaviour {
             newBullet.SetSpeed(fireSpeed);
 
             Instantiate(shell.gameObject, shellSpawner.position, shellSpawner.rotation);
-        }
+            muzzleFlash.Activate();
+    }
     }
 }
