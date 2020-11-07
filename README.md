@@ -1,5 +1,9 @@
 ## LiveToNextLevel
 
+#### How to play:
+###### 移动控制: WASD 或者 ↑ ↓ ← →              开火: 鼠标左键
+###### 切换开火模式: 暂无                       使用道具: 暂无
+
 ##### 1.随机连通地图:
 ###### 洗牌算法(Fisher Yates &amp; Knuth - Pursten Feld),
 地图与障碍物的随机生成,涉及FIFO,Lerp
@@ -53,12 +57,14 @@ public void AddTorque(Vector3 torque, ForceMode mode = ForceMode.Force);
 ###### <1>Trail Renderer(轨迹渲染器)组件 用来做轨迹跟踪,渲染轨迹弹道
 
 ##### 机制:
-<1>类挂机检测:玩家长时间在某一处静止不动,或者攻击时持续逗留在某地超过一定时间被检测到,在玩家附近生成敌人,增加紧张感
-<2>武器系统:增加开火模式,点射,自动,单点三种模式
-<3>双开火点,两个枪口都可以发射子弹
+###### <1>类挂机检测:玩家长时间在某一处静止不动,或者攻击时持续逗留在某地超过一定时间被检测到,在玩家附近生成敌人,增加紧张感
+###### <2>武器系统:增加开火模式,点射,自动,单点三种模式
+###### <3>双开火点,两个枪口都可以发射子弹
 
 ##### 问题:
-<1>:获取物体的Renderer组件的material.color属性的Alpha通道值来改变预制体的颜色透明度,必须将material的(Renderring Mode)渲染模式
-修改为Fade模式
-<2>:VsCode无法自动引用脚本命名空间导致编译器报错的解决方案,工程中删掉Assembly-CSharp.csproj文件,Unity中首选项中将编译器设置为
-Visual Studio,重新生成所有的csproj文件(Regenerate all csproj files),再将默认编译器切换为VsCode
+###### <1>:获取物体的Renderer组件的material.color属性的Alpha通道值来改变预制体的颜色透明度,必须将material的(Renderring Mode)渲染模式修改为Fade模式
+###### <2>:VsCode无法自动引用脚本命名空间导致编译器报错的解决方案,工程中删掉Assembly-CSharp.csproj文件,Unity中首选项中将编译器设置为Visual Studio,重新生成所有的csproj文件(Regenerate all csproj files),再将默认编译器切换为VsCode
+###### <3>:Trail Renderer颜色的设置,Color属性调节渐变和颜色,startColor和endColor属性可以设置渐变色值
+
+#### DEVELOP MODE 键位说明
+###### Enter 跳过当前波
