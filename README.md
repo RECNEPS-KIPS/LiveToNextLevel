@@ -1,4 +1,4 @@
-#### LiveToNextLevel
+## LiveToNextLevel
 ##### 1.随机连通地图:
 ###### 洗牌算法(Fisher Yates &amp; Knuth - Pursten Feld),
 地图与障碍物的随机生成,涉及FIFO,Lerp
@@ -45,3 +45,7 @@ public void AddTorque(Vector3 torque, ForceMode mode = ForceMode.Force);
 ###### <3>Random.insideUnitSphere 返回单位球内一个随机点(only read)
 ##### 机制:
 ###### <1>类挂机检测:玩家长时间在某一处静止不动,或者攻击时持续逗留在某地超过一定时间被检测到,在玩家附近生成敌人,增加紧张感
+
+##### 问题:
+###### <1>:获取物体的Renderer组件的material.color属性的Alpha通道值来改变预制体的颜色透明度,必须将material的(Renderring Mode)渲染模式
+###### 修改为Fade模式
