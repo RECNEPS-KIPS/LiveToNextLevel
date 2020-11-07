@@ -221,6 +221,16 @@ public class MapGenerator : MonoBehaviour {
             x = _x;
             y = _y;
         }
+        public override bool Equals(object obj) {
+            return base.Equals(obj);
+        }
+        public override int GetHashCode() {
+            return base.GetHashCode();
+        }
+        public override string ToString() {
+            return base.ToString();
+        }
+
         //重定义操作符,必须static并且返回bool值,一般重定义操作符都是成对重定义
         public static bool operator ==(Coord c1, Coord c2) {
             return c1.x == c2.x && c1.y == c2.y;

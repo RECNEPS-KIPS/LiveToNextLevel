@@ -14,7 +14,7 @@ public class Enemy : LivingEntity {
     private State curState;//当前状态
     public NavMeshAgent pathFinder;//寻路组件
     private Transform target;//寻路目标
-    public float attackDis = 0.5f;//攻击距离
+    float attackDis = 0.5f;//攻击距离
     private Material mat;
     private Color oriColor;
 
@@ -29,29 +29,26 @@ public class Enemy : LivingEntity {
     private bool hasTarget;
     public ParticleSystem deathEffect;
 
-    protected override void Start() {
-        base.Start();
+    private void Awake() {
         pathFinder = GetComponent<NavMeshAgent>();//寻路组件
-        mat = GetComponent<Renderer>().material;
-        oriColor = mat.color;//初始颜色
-
         deathEffect = Resources.Load<ParticleSystem>("Prefabs/Effects/EnemyDeathEffect");
-
         //场景中有存活的玩家
         if (GameObject.FindGameObjectWithTag("Player") != null) {
             hasTarget = true;
-            curState = State.Chase;//默认追赶目标
             target = GameObject.FindGameObjectWithTag("Player").transform;
             targetEntity = target.GetComponent<LivingEntity>();
-            targetEntity.OnDeath += OnTargetDeath;//订阅目标死亡事件
 
             targetRadius = target.GetComponent<CapsuleCollider>().radius;//获取半径
             selfRadius = this.GetComponent<CapsuleCollider>().radius;
-
-            StartCoroutine(UpdatePath());//开启寻路协程,防止每一帧都执行寻路
-
         }
-
+    }
+    protected override void Start() {
+        base.Start();
+        if (hasTarget) {
+            curState = State.Chase;//默认追赶目标
+            targetEntity.OnDeath += OnTargetDeath;//订阅目标死亡事件
+            StartCoroutine(UpdatePath());//开启寻路协程,防止每一帧都执行寻路
+        }
     }
 
     /// <summary>
@@ -135,6 +132,17 @@ public class Enemy : LivingEntity {
                 }
             }
             yield return new WaitForSeconds(refreshRate);
+        }
+    }
+
+    public void SetCharacter(float moveSpeed, int hitsTimes, float enemyHP, Color skin) {
+        pathFinder.speed = moveSpeed;
+        if (hasTarget) {
+            damage = Mathf.Ceil(targetEntity.startHP / hitsTimes);
+            startHP = enemyHP;
+            mat = GetComponent<Renderer>().material;
+            mat.color = skin;
+            oriColor = mat.color;//初始颜色
         }
     }
 }

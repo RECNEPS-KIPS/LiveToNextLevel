@@ -45,8 +45,8 @@ public class Spawner : MonoBehaviour {
                 isCamp = Vector3.Distance(playerTrs.position, lastCampPos) < campMoveDistance;
                 lastCampPos = playerTrs.position;
             }
-            //剩余需要生成的敌人数大于0,当前时间满足生成时间
-            if (remainEnemiesToSpawn > 0 && Time.time > nextSpawnTime) {
+            //剩余需要生成的敌人数大于0或者为无尽模式,当前时间满足生成时间
+            if ((remainEnemiesToSpawn > 0 || curWave.infinate == true) && Time.time > nextSpawnTime) {
                 remainEnemiesToSpawn--;
                 nextSpawnTime = Time.time + curWave.timeBetweenSpawns;//为下一次生成时间赋值
                 StartCoroutine(SpawnerEnemy());//生成敌人
@@ -80,6 +80,7 @@ public class Spawner : MonoBehaviour {
 
         Enemy spawnEnemy = GameObject.Instantiate(enemy, randomTile.position + Vector3.up, Quaternion.identity) as Enemy;
         spawnEnemy.OnDeath += OnEnemyDeath;//订阅事件
+        spawnEnemy.SetCharacter(curWave.moveSpeed, curWave.hitsToKillPlayer, curWave.enemyHP, curWave.skinColor);
     }
 
 
@@ -129,8 +130,13 @@ public class Spawner : MonoBehaviour {
     [System.Serializable]
     //波数对象
     public class Wave {
+        public bool infinate;//是否无限
         public int enemyCount;//一波包含敌人数
         public float timeBetweenSpawns;//两波生成间隔时间
+        public float moveSpeed;//移速
+        public int hitsToKillPlayer;
+        public float enemyHP;
+        public Color skinColor;
 
     }
 }

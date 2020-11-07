@@ -20303,12 +20303,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - enemyCount: 5
+  - infinate: 0
+    enemyCount: 5
     timeBetweenSpawns: 1
-  - enemyCount: 10
+    moveSpeed: 1
+    hitsToKillPlayer: 5
+    enemyHP: 2
+    skinColor: {r: 1, g: 0, b: 0, a: 0}
+  - infinate: 0
+    enemyCount: 10
     timeBetweenSpawns: 0.75
-  - enemyCount: 100
-    timeBetweenSpawns: 0.2
+    moveSpeed: 2
+    hitsToKillPlayer: 4
+    enemyHP: 4
+    skinColor: {r: 0, g: 0.13428664, b: 1, a: 0}
+  - infinate: 1
+    enemyCount: 0
+    timeBetweenSpawns: 1
+    moveSpeed: 4
+    hitsToKillPlayer: 2
+    enemyHP: 6
+    skinColor: {r: 1, g: 0.2216981, b: 0.5715504, a: 0}
   enemy: {fileID: 0}
   remainEnemiesToSpawn: 0
 --- !u!4 &1240393617
