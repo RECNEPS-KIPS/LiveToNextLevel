@@ -10,6 +10,7 @@ public class MapGenerator : MonoBehaviour {
     public Transform navmeshFloor;
     public Transform navMeshObs;
     public Vector2 mapMaxSize;
+    float obsHeight = 5;
 
     [Range(0, 1)]
     public float outlinePercent;//地图间隔
@@ -112,19 +113,19 @@ public class MapGenerator : MonoBehaviour {
         // TODO: 动态生成地图边缘包围墙,NavMeshObstacle + Collider
         Transform maskLeft = Instantiate(navMeshObs, Vector3.left * (currentMap.mapSize.x + mapMaxSize.x) / 4f * tileSize, Quaternion.identity) as Transform;
         maskLeft.parent = mapHolder;
-        maskLeft.localScale = new Vector3((mapMaxSize.x - currentMap.mapSize.x) / 2f, 1, currentMap.mapSize.y) * tileSize;
+        maskLeft.localScale = new Vector3((mapMaxSize.x - currentMap.mapSize.x) / 2f, 1, obsHeight * currentMap.mapSize.y) * tileSize;
 
         Transform maskRight = Instantiate(navMeshObs, Vector3.right * (currentMap.mapSize.x + mapMaxSize.x) / 4f * tileSize, Quaternion.identity) as Transform;
         maskRight.parent = mapHolder;
-        maskRight.localScale = new Vector3((mapMaxSize.x - currentMap.mapSize.x) / 2f, 1, currentMap.mapSize.y) * tileSize;
+        maskRight.localScale = new Vector3((mapMaxSize.x - currentMap.mapSize.x) / 2f, obsHeight * 1, currentMap.mapSize.y) * tileSize;
 
         Transform maskTop = Instantiate(navMeshObs, Vector3.forward * (currentMap.mapSize.y + mapMaxSize.y) / 4f * tileSize, Quaternion.identity) as Transform;
         maskTop.parent = mapHolder;
-        maskTop.localScale = new Vector3(mapMaxSize.x, 1, (mapMaxSize.y - currentMap.mapSize.y) / 2f) * tileSize;
+        maskTop.localScale = new Vector3(mapMaxSize.x, obsHeight * 1, (mapMaxSize.y - currentMap.mapSize.y) / 2f) * tileSize;
 
         Transform maskBottom = Instantiate(navMeshObs, Vector3.back * (currentMap.mapSize.y + mapMaxSize.y) / 4f * tileSize, Quaternion.identity) as Transform;
         maskBottom.parent = mapHolder;
-        maskBottom.localScale = new Vector3(mapMaxSize.x, 1, (mapMaxSize.y - currentMap.mapSize.y) / 2f) * tileSize;
+        maskBottom.localScale = new Vector3(mapMaxSize.x, obsHeight * 1, (mapMaxSize.y - currentMap.mapSize.y) / 2f) * tileSize;
 
         navmeshFloor.localScale = new Vector3(mapMaxSize.x, mapMaxSize.y) * tileSize;
     }
