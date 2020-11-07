@@ -3,7 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Gun : MonoBehaviour {
-    public Transform fireTrs;//枪口位置
+    //开火模式
+    public enum FireMode {
+        Auto, //全自动
+        Burst, //快速射击
+        Single,//单点
+    }
+    public int burstCount;//快速射击子弹数量
+    public int shotsRemainInBurst;
+    public FireMode fireMode;
+    public Transform[] fireTrs;//枪口位置
     public Bullet bullet;
     public float msBetweenShots = 100;//射击间隔
     public float fireSpeed = 35;//射击速度
@@ -12,10 +21,13 @@ public class Gun : MonoBehaviour {
     public Transform shellSpawner;//弹壳弹出点
     private float nextShotTime;
     public MuzzleFlash muzzleFlash;
+    bool triggerRelease;//标识扳机是否释放
     void Start() {
         muzzleFlash = GetComponent<MuzzleFlash>();
         bullet = Resources.Load<GameObject>("Prefabs/Bullet").GetComponent<Bullet>();
         shell = Resources.Load<GameObject>("Prefabs/Shell").transform;
+
+        shotsRemainInBurst = burstCount;
     }
 
     // Update is called once per frame
@@ -26,14 +38,40 @@ public class Gun : MonoBehaviour {
     /// <summary>
     /// 触发射击
     /// </summary>
-    public void Shoot() {
+    private void Shoot() {
         if (Time.time > nextShotTime) {
-            nextShotTime = Time.time + msBetweenShots / 1000;
-            Bullet newBullet = Instantiate(bullet, fireTrs.position, fireTrs.rotation) as Bullet;
-            newBullet.SetSpeed(fireSpeed);
-
+            if (fireMode == FireMode.Burst) {
+                if (shotsRemainInBurst == 0) {
+                    return;
+                }
+                shotsRemainInBurst--;
+            } else if (fireMode == FireMode.Single) {
+                if (!triggerRelease) {
+                    return;
+                }
+            }
+            for (int i = 0; i < fireTrs.Length; i++) {
+                nextShotTime = Time.time + msBetweenShots / 1000;
+                Bullet newBullet = Instantiate(bullet, fireTrs[i].position, fireTrs[i].rotation) as Bullet;
+                newBullet.SetSpeed(fireSpeed);
+            }
             Instantiate(shell.gameObject, shellSpawner.position, shellSpawner.rotation);
             muzzleFlash.Activate();
+        }
     }
+
+    /// <summary>
+    /// 扳机按下
+    /// </summary>
+    public void OnTriggerHolder() {
+        Shoot();
+        triggerRelease = false;
+    }
+    /// <summary>
+    /// 扳机释放
+    /// </summary>
+    public void OnTriggerRelease() {
+        triggerRelease = true;
+        shotsRemainInBurst = burstCount;
     }
 }

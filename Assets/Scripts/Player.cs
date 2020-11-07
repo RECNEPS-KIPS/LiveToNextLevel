@@ -36,7 +36,10 @@ public class Player : LivingEntity {
         }
         //武器处理模块
         if (Input.GetMouseButton(0)) {
-            gunController.Shoot();
+            gunController.OnTriggerHolder();
+        }
+        if (Input.GetMouseButtonUp(0)) {
+            gunController.OnTriggerRelease();
         }
     }
 }
