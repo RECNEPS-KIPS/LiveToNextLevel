@@ -5,11 +5,11 @@ using UnityEngine;
 public class Gun : MonoBehaviour {
     //开火模式
     public enum FireMode {
-        Auto, //全自动
-        Burst, //快速射击
+        Auto, //自动
+        Burst, //点射
         Single,//单点
     }
-    public int burstCount;//快速射击子弹数量
+    public int burstCount;//点射子弹数量
     public int shotsRemainInBurst;
     public FireMode fireMode;
     public Transform[] fireTrs;//枪口位置

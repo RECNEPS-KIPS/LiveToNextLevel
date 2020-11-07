@@ -84,7 +84,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   burstCount: 5
   shotsRemainInBurst: 0
-  fireMode: 1
+  fireMode: 0
   fireTrs:
   - {fileID: 1732684760690011620}
   - {fileID: 5822137777693713730}
