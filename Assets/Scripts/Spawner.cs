@@ -80,7 +80,7 @@ public class Spawner : MonoBehaviour {
             randomTile = map.GetTileFromPosition(playerTrs.position);
         }
         Material tileMat = randomTile.GetComponent<Renderer>().material;
-        Color oriColor = tileMat.color;
+        Color oriColor = Color.white;
         Color flashColor = Color.red;
         float spawnTimer = 0;//缓动颜色
         while (spawnTimer <= spawnDelay) {
@@ -108,6 +108,7 @@ public class Spawner : MonoBehaviour {
     }
 
     void OnPlayerDeath() {
+        Cursor.visible = true;
         isDisable = true;
         GameManager.Instance.isPlayerDeath = true;
     }

@@ -55,6 +55,7 @@ public void AddTorque(Vector3 torque, ForceMode mode = ForceMode.Force);
 
 ```    
 ##### <3>Random.insideUnitSphere 返回单位球内一个随机点(only read)
+##### <4>Cursor.visible = true; 设置光标是否可见
 
 #### 6.组件
 ##### <1>Trail Renderer(轨迹渲染器)组件 用来做轨迹跟踪,渲染轨迹弹道
@@ -68,6 +69,7 @@ public void AddTorque(Vector3 torque, ForceMode mode = ForceMode.Force);
 ##### <1>:获取物体的Renderer组件的material.color属性的Alpha通道值来改变预制体的颜色透明度,必须将material的(Renderring Mode)渲染模式修改为Fade模式
 ##### <2>:VsCode无法自动引用脚本命名空间导致编译器报错的解决方案,工程中删掉Assembly-CSharp.csproj文件,Unity中首选项中将编译器设置为Visual Studio,重新生成所有的csproj文件(Regenerate all csproj files),再将默认编译器切换为VsCode
 ##### <3>:Trail Renderer颜色的设置,Color属性调节渐变和颜色,startColor和endColor属性可以设置渐变色值
+##### <4>:在敌人开始生成的位置,地图瓦片闪烁期间,在瓦片坐标击杀其他敌人,导致瓦片颜色为红色消除不掉的问题:在相同位置连续生成敌人,瓦片颜色置为oriColor,但是oriColor赋值为tile.color,此颜色不一定为真正的初始色,需要修改为Color.white
 
 ### 9.DEVELOP MODE 键位说明
 
