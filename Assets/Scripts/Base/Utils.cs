@@ -36,6 +36,12 @@ public static class Utils {
         return res;
     }
 
+    public static T FindObj<T>(string name) {
+        Transform target = GameObject.Find(name).transform;
+        T res = target.GetComponent<T>();
+        return res;
+    }
+
     /// <summary>
     /// 递归查找父节点下的对象
     /// </summary>

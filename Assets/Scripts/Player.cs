@@ -9,12 +9,14 @@ public class Player : LivingEntity {
     public Camera viewCamera;
     private PlayerController playerController;
     private GunController gunController;
+    public Transform crossSight;//十字瞄具
 
     // Start is called before the first frame update
     protected override void Start() {
         base.Start();
         playerController = GetComponent<PlayerController>();
         gunController = GetComponent<GunController>();
+        crossSight = Utils.FindObj<Transform>("CrossSight");
         viewCamera = Camera.main;
     }
 
@@ -31,8 +33,9 @@ public class Player : LivingEntity {
         float rayDis;
         if (groundPlane.Raycast(ray, out rayDis)) {
             Vector3 point = ray.GetPoint(rayDis);
-            Debug.DrawLine(ray.origin, point, Color.red);
+            //Debug.DrawLine(ray.origin, point, Color.red);
             playerController.LookAt(point);
+            crossSight.position = new Vector3(point.x, gunController.GetGunHeight(), point.z);
         }
         //武器处理模块
         if (Input.GetMouseButton(0)) {

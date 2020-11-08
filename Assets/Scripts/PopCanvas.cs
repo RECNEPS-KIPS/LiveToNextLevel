@@ -30,7 +30,7 @@ public class PopCanvas : MonoBehaviour {
     /// </summary>
     void OnGameOver() {
         //DontDestroyOnLoad(popCavas.gameObject);
-        print("Game Over");
+        //print("Game Over");
         fadePanel.gameObject.SetActive(true);
         Color curColor = new Color(fadePanelColor.r, fadePanelColor.g, fadePanelColor.b, 0);
         Color tarColor = new Color(fadePanelColor.r, fadePanelColor.g, fadePanelColor.b, 1);
@@ -59,6 +59,7 @@ public class PopCanvas : MonoBehaviour {
     void PlayAgain() {
         //print("play again");
         SceneManager.LoadScene("Game");
+        GameManager.Instance.isPlayerDeath = false;
         //fadePanel.gameObject.SetActive(false);
     }
 }

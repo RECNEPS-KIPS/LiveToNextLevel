@@ -4,11 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour {
-    /// <summary>
-    /// 开发者模式参数
-    /// </summary>
-    public bool DEVELOP_MODE;
-
     public Wave[] waves;
     private Wave curWave;//当前波
     private int curWaveNum;//当前波数的数量
@@ -58,7 +53,7 @@ public class Spawner : MonoBehaviour {
             }
         }
         //开发者模式下按回车直接跳过这一波
-        if (DEVELOP_MODE) {
+        if (GameManager.Instance.DEVELOP_MODE) {
             if (Input.GetKeyDown(KeyCode.Return)) {
                 StopCoroutine("SpawnerEnemy");//停止生成敌人协程
                 //销毁当前波的敌人
@@ -88,7 +83,7 @@ public class Spawner : MonoBehaviour {
         Color oriColor = tileMat.color;
         Color flashColor = Color.red;
         float spawnTimer = 0;//缓动颜色
-        while (spawnTimer < spawnDelay) {
+        while (spawnTimer <= spawnDelay) {
             tileMat.color = Color.Lerp(oriColor, flashColor, Mathf.PingPong(spawnTimer * tileFlashSpeed, 1));
             spawnTimer += Time.deltaTime;
             yield return null;
@@ -114,6 +109,7 @@ public class Spawner : MonoBehaviour {
 
     void OnPlayerDeath() {
         isDisable = true;
+        GameManager.Instance.isPlayerDeath = true;
     }
 
     /// <summary>

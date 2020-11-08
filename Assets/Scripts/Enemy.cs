@@ -28,8 +28,10 @@ public class Enemy : LivingEntity {
     private LivingEntity targetEntity;
     private bool hasTarget;
     public ParticleSystem deathEffect;
+    Renderer selfRenderer;
 
     private void Awake() {
+        selfRenderer = GetComponent<Renderer>();
         pathFinder = GetComponent<NavMeshAgent>();//寻路组件
         deathEffect = Resources.Load<ParticleSystem>("Prefabs/Effects/EnemyDeathEffect");
         //场景中有存活的玩家
@@ -62,6 +64,7 @@ public class Enemy : LivingEntity {
     public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDir) {
         if (damage >= HP) { //创建死亡特效
             GameObject effectObj = GameObject.Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDir));
+            effectObj.GetComponent<Renderer>().material.color = selfRenderer.material.color;//死亡特效的材质球颜色设为敌人当前皮肤色
             Destroy(effectObj, deathEffect.startLifetime);
         }
         base.TakeHit(damage, hitPoint, hitDir);
@@ -71,7 +74,7 @@ public class Enemy : LivingEntity {
     void Update() {
         if (hasTarget) {
             //当前时间大于下一次攻击时间
-            if (Time.time > nextAttackTime) {
+            if (Time.time > nextAttackTime && target != null) {
                 //Vector3.Distance(target.transform.position,transform.position)
                 float sqrtDis = (target.transform.position - transform.position).sqrMagnitude;//与目标距离的平方
                 if (sqrtDis < Mathf.Pow(attackDis + selfRadius + targetRadius, 2)) {

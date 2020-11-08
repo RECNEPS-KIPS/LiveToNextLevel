@@ -9,7 +9,7 @@ public class GunController : MonoBehaviour {
 
     void Start() {
         weaponHolder = transform.Find("WeaponHolder");
-        Debug.Log(weaponHolder == null);
+        //Debug.Log(weaponHolder == null);
         defaultGun = Resources.Load<GameObject>("Prefabs/Gun").GetComponent<Gun>();
         if (defaultGun != null) {
             EquipGun(defaultGun);
@@ -29,15 +29,31 @@ public class GunController : MonoBehaviour {
         equippedGun.transform.parent = weaponHolder;
     }
 
+    /// <summary>
+    /// 扣下扳机
+    /// </summary>
     public void OnTriggerHolder() {
         if (equippedGun != null) {
             equippedGun.OnTriggerHolder();
         }
     }
-
+    /// <summary>
+    /// 释放扳机
+    /// </summary>
     public void OnTriggerRelease() {
         if (equippedGun != null) {
             equippedGun.OnTriggerRelease();
+        }
+    }
+    /// <summary>
+    /// 获取枪的高度
+    /// </summary>
+    /// <returns></returns>
+    public float GetGunHeight() {
+        if (equippedGun != null) {
+            return equippedGun.transform.position.y;
+        } else {
+            return -1;
         }
     }
 }
