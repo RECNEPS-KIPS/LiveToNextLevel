@@ -34,7 +34,7 @@ public class MapGenerator : MonoBehaviour {
     /// <param name="curWaveNum"></param>
     public void OnNewWave(int curWaveNum) {
         mapIndex = curWaveNum - 1;
-        print(mapIndex);
+        //print(mapIndex);
         GenerateMap();
     }
 
@@ -43,6 +43,7 @@ public class MapGenerator : MonoBehaviour {
     /// </summary>
     public void GenerateMap() {
         currentMap = maps[mapIndex];
+        currentMap.seed = Random.Range(-100, 100);
         tileMap = new Transform[currentMap.mapSize.x, currentMap.mapSize.y];
         System.Random random = new System.Random(currentMap.seed);
         GetComponent<BoxCollider>().size = new Vector3(currentMap.mapSize.x * tileSize, 0.05f, currentMap.mapSize.y * tileSize);

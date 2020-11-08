@@ -33,7 +33,7 @@ public class Shell : MonoBehaviour {
         Color tarColor = new Color(startColor.r, startColor.g, startColor.b, 0);
         while (percent < 1) {
             percent += Time.deltaTime * fadeSpeed;
-            print(percent);
+            //print(percent);
             mat.color = Color.Lerp(startColor, tarColor, percent);
             yield return null;
         }

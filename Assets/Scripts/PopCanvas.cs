@@ -4,20 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour {
+public class PopCanvas : MonoBehaviour {
     Transform fadePanel;
     Transform endPanel;
     Image fadeMask;
     Color fadePanelColor;
-    Button anaginBtn;
+    Button againBtn;
     void Start() {
         fadePanel = transform.Find("FadeInOutMask").transform;
         fadeMask = fadePanel.GetComponent<Image>();
         fadePanelColor = fadeMask.color;
         endPanel = fadePanel.Find("EndPanel");
         FindObjectOfType<Player>().OnDeath += OnGameOver;//触发game over事件
-        anaginBtn = Utils.FindObj<Button>(fadePanel, "AgainBtn");
-        anaginBtn.onClick.AddListener(delegate () {
+        againBtn = Utils.FindObj<Button>(fadePanel, "AgainBtn");
+        againBtn.onClick.AddListener(delegate () {
             PlayAgain();
         });
     }
@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour {
     /// 弹出game over面板
     /// </summary>
     void OnGameOver() {
+        //DontDestroyOnLoad(popCavas.gameObject);
         print("Game Over");
         fadePanel.gameObject.SetActive(true);
         Color curColor = new Color(fadePanelColor.r, fadePanelColor.g, fadePanelColor.b, 0);
@@ -58,6 +59,6 @@ public class UIManager : MonoBehaviour {
     void PlayAgain() {
         //print("play again");
         SceneManager.LoadScene("Game");
+        //fadePanel.gameObject.SetActive(false);
     }
-
 }
