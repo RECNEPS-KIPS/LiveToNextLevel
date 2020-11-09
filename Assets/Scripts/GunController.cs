@@ -57,9 +57,23 @@ public class GunController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// 瞄准
+    /// </summary>
+    /// <param name="aimPoint"></param>
     public void Aim(Vector3 aimPoint) {
         if (equippedGun != null) {
             equippedGun.Aim(aimPoint);
         }
     }
+
+    /// <summary>
+    /// 装填弹药
+    /// </summary>
+    public void ReloadClip() {
+        if (equippedGun != null) {
+            equippedGun.ReloadClip();
+        }
+    }
+
 }

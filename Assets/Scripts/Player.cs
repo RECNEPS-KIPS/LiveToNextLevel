@@ -55,5 +55,9 @@ public class Player : LivingEntity {
         if (Input.GetMouseButtonUp(0)) {
             gunController.OnTriggerRelease();
         }
+        //装填弹药
+        if (Input.GetKeyDown(KeyCode.R)) {
+            gunController.ReloadClip();
+        }
     }
 }
