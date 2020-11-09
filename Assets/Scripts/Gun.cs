@@ -32,7 +32,7 @@ public class Gun : MonoBehaviour {
     public float recoilTrsRecoverTime = 0.1f;//后坐力位移恢复时间
     public float recoilAngleRecoverTime = 0.1f;//后坐力旋转恢复时间
     bool triggerRelease;//标识扳机是否释放
-    public float reloadTime = 3;
+    public float reloadTime = 0.1f;
     bool isClipReloading;//是否正在重新装填弹药
     void Start() {
         //初始化
@@ -63,7 +63,9 @@ public class Gun : MonoBehaviour {
     /// </summary>
     /// <param name="aimPoint">瞄准目标点</param>
     public void Aim(Vector3 aimPoint) {
-        transform.LookAt(aimPoint);
+        if (!isClipReloading) {
+            transform.LookAt(aimPoint);
+        }
     }
 
     /// <summary>
@@ -103,18 +105,22 @@ public class Gun : MonoBehaviour {
     /// 装填弹药
     /// </summary>
     public void ReloadClip() {
-        StartCoroutine(Reload());
+        //未处于装填状态且弹夹不是满的
+        if (!isClipReloading && clipRemainBulletCount != clipCount) {
+            StartCoroutine(Reload());
+        }
+
     }
     IEnumerator Reload() {
         isClipReloading = true;
-        yield return new WaitForSeconds(0.5f);//装填时间
+        yield return new WaitForSeconds(0.2f);//装填时间
         float percent = 0;
         float reloadSpeed = 1f / reloadTime;
         Vector3 oriAngle = transform.localEulerAngles;
-        float maxReloadAngle = 30;//最大角度30°;
+        float maxReloadAngle = 20;//最大角度30°;
         while (percent < 1) {
             percent += Time.deltaTime * reloadSpeed;
-            float deltaAngle = (-(percent * percent) + percent) * 4;
+            float deltaAngle = (-Mathf.Pow(percent, 2) + percent) * 4;
             float angle = Mathf.Lerp(0, maxReloadAngle, deltaAngle);
             transform.localEulerAngles = oriAngle + Vector3.left * angle;
 

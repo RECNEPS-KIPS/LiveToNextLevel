@@ -82,6 +82,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8846283b2140a7149885aeac707df69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clipCount: 30
+  clipRemainBulletCount: 0
   burstCount: 5
   shotsRemainInBurst: 0
   fireMode: 0
@@ -94,6 +96,14 @@ MonoBehaviour:
   shell: {fileID: 0}
   shellSpawner: {fileID: 1688164257980111367}
   muzzleFlash: {fileID: 0}
+  recoilSmoothDampVelocity: {x: 0, y: 0, z: 0}
+  recoilRotSmoothDampVelocity: 0
+  recoilAngle: 0
+  kickTrsMinMax: {x: 0.05, y: 0.2}
+  kickAngleMinMax: {x: 1, y: 3}
+  recoilTrsRecoverTime: 0.1
+  recoilAngleRecoverTime: 0.1
+  reloadTime: 0.3
 --- !u!114 &4347957664749259520
 MonoBehaviour:
   m_ObjectHideFlags: 0
