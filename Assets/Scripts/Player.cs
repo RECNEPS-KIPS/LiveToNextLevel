@@ -40,7 +40,12 @@ public class Player : LivingEntity {
             //Debug.DrawLine(ray.origin, point, Color.red);
             playerController.LookAt(point);
             crossSightTrs.position = new Vector3(point.x, gunHeight, point.z);
-            crossSight.CheckTarget(ray); 
+            crossSight.CheckTarget(ray);
+
+            //计算瞄准点和玩家的距离,若太近则不瞄准
+            if ((new Vector2(point.x, point.z) - new Vector2(transform.position.x, transform.position.z)).magnitude > 1f) {
+                gunController.Aim(point);
+            }
 
         }
         //武器处理模块

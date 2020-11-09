@@ -114,7 +114,7 @@ public class MapGenerator : MonoBehaviour {
         // TODO: 动态生成地图边缘包围墙,NavMeshObstacle + Collider
         Transform maskLeft = Instantiate(navMeshObs, Vector3.left * (currentMap.mapSize.x + mapMaxSize.x) / 4f * tileSize, Quaternion.identity) as Transform;
         maskLeft.parent = mapHolder;
-        maskLeft.localScale = new Vector3((mapMaxSize.x - currentMap.mapSize.x) / 2f, 1, obsHeight * currentMap.mapSize.y) * tileSize;
+        maskLeft.localScale = new Vector3((mapMaxSize.x - currentMap.mapSize.x) / 2f, 1 * obsHeight, currentMap.mapSize.y) * tileSize;
 
         Transform maskRight = Instantiate(navMeshObs, Vector3.right * (currentMap.mapSize.x + mapMaxSize.x) / 4f * tileSize, Quaternion.identity) as Transform;
         maskRight.parent = mapHolder;

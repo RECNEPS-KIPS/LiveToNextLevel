@@ -21,6 +21,14 @@ public class Gun : MonoBehaviour {
     public Transform shellSpawner;//弹壳弹出点
     private float nextShotTime;
     public MuzzleFlash muzzleFlash;
+    public Vector3 recoilSmoothDampVelocity;
+    public float recoilRotSmoothDampVelocity;
+    public float recoilAngle;
+    [Header("后坐力相关变量")]
+    public Vector2 kickTrsMinMax = new Vector2(0.05f, 0.2f);//后坐力位移范围值
+    public Vector2 kickAngleMinMax = new Vector2(3, 5);//后坐力旋转范围值
+    public float recoilTrsRecoverTime = 0.1f;//后坐力位移恢复时间
+    public float recoilAngleRecoverTime = 0.1f;//后坐力旋转恢复时间
     bool triggerRelease;//标识扳机是否释放
     void Start() {
         muzzleFlash = GetComponent<MuzzleFlash>();
@@ -31,8 +39,19 @@ public class Gun : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    void LateUpdate() {
+        //模拟后坐力回弹
+        transform.localPosition = Vector3.SmoothDamp(transform.localPosition, Vector3.zero, ref recoilSmoothDampVelocity, recoilTrsRecoverTime);
+        recoilAngle = Mathf.SmoothDamp(recoilAngle, 0, ref recoilRotSmoothDampVelocity, recoilAngleRecoverTime);
+        transform.localEulerAngles = transform.localEulerAngles + Vector3.left * recoilAngle;
+    }
 
+    /// <summary>
+    /// 瞄准
+    /// </summary>
+    /// <param name="aimPoint">瞄准目标点</param>
+    public void Aim(Vector3 aimPoint) {
+        transform.LookAt(aimPoint);
     }
 
     /// <summary>
@@ -57,6 +76,9 @@ public class Gun : MonoBehaviour {
             }
             Instantiate(shell.gameObject, shellSpawner.position, shellSpawner.rotation);
             muzzleFlash.Activate();
+            transform.localPosition -= Vector3.forward * Random.Range(kickTrsMinMax.x, kickTrsMinMax.y);//射击时位置后移,模拟后坐力
+            recoilAngle += Random.Range(kickAngleMinMax.x, kickAngleMinMax.y);
+            recoilAngle = Mathf.Clamp(recoilAngle, 0, 30);
         }
     }
 
