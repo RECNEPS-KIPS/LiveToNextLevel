@@ -10,8 +10,10 @@ public class GameManager : BaseSingleton<GameManager> {
     public bool DEVELOP_MODE = false;
     public bool gamePause = false;
     public bool isPlayerDeath = false;
+    public PopCanvasManager popCanvasManager;
 
     private void Start() {
+        popCanvasManager = FindObjectOfType<PopCanvasManager>();
     }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.G)) {

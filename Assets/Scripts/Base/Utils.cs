@@ -31,9 +31,14 @@ public static class Utils {
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
     public static T FindObj<T>(Transform root, string name) {
-        Transform target = GetChild(root, name);
-        T res = target.GetComponent<T>();
-        return res;
+        if (name == null) {
+            T res = root.GetComponent<T>();
+            return res;
+        } else {
+            Transform target = GetChild(root, name);
+            T res = target.GetComponent<T>();
+            return res;
+        }
     }
 
     public static T FindObj<T>(string name) {

@@ -59,5 +59,8 @@ public class Player : LivingEntity {
         if (Input.GetKeyDown(KeyCode.R)) {
             gunController.ReloadClip();
         }
+        if (Input.GetKeyDown(KeyCode.X)) {
+            GameManager.Instance.popCanvasManager.PopMessage(Vector3.zero, "切换武器", Color.white);
+        }
     }
 }

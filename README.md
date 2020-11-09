@@ -4,8 +4,9 @@
 
 ##### · 移动控制: WASD 或者 ↑ ↓ ← →
 ##### · 开火: 鼠标左键
-##### · 切换开火模式: 暂无
+##### · 切换开火模式: X
 ##### · 使用道具: 暂无
+##### · 子弹装填: R
 
 #### 1.随机连通地图:
 ##### 洗牌算法(Fisher Yates &amp; Knuth - Pursten Feld),
@@ -15,13 +16,15 @@
 ##### 洪水填充算法
 1.从地图中心点出发,四领域遍历每一个可以到达的格子,使用提前随机好的障碍物列表来限制不可到达的状态格子,绕过这些不可到达的格子,从而生成连通的地图
 
-#### 2.武器系统,开火模式[自动,点射,单点]
+#### 2.武器系统,开火模式[自动,点射,单点],子弹装填功能,子弹后座力实现
 
 #### 3.Player和Enemy类
 
 #### 4.Bullet类,监听事件与伤害机制
 
-#### 5.部分接口说明
+#### 5.PopCanvasManager类,处理popCanvas层的UI逻辑,目前包含弹出浮动Tips的接口
+
+#### 6.部分接口说明
 ##### <1>Physics.OverlapSphere方法
 ```csharp
 Physics.OverlapSphere(transform.position, 0.1f, collisionMask);
@@ -57,20 +60,20 @@ public void AddTorque(Vector3 torque, ForceMode mode = ForceMode.Force);
 ##### <3>Random.insideUnitSphere 返回单位球内一个随机点(only read)
 ##### <4>Cursor.visible = true; 设置光标是否可见
 
-#### 6.组件
+#### 7.组件
 ##### <1>Trail Renderer(轨迹渲染器)组件 用来做轨迹跟踪,渲染轨迹弹道
 
-#### 7.机制:
+#### 8.机制:
 ##### <1>类挂机检测:玩家长时间在某一处静止不动,或者攻击时持续逗留在某地超过一定时间被检测到,在玩家附近生成敌人,增加紧张感
 ##### <2>武器系统:增加开火模式,点射,自动,单点三种模式
 ##### <3>双开火点,两个枪口都可以发射子弹
 
-#### 8.问题:
+#### 9.问题:
 ##### <1>:获取物体的Renderer组件的material.color属性的Alpha通道值来改变预制体的颜色透明度,必须将material的(Renderring Mode)渲染模式修改为Fade模式
 ##### <2>:VsCode无法自动引用脚本命名空间导致编译器报错的解决方案,工程中删掉Assembly-CSharp.csproj文件,Unity中首选项中将编译器设置为Visual Studio,重新生成所有的csproj文件(Regenerate all csproj files),再将默认编译器切换为VsCode
 ##### <3>:Trail Renderer颜色的设置,Color属性调节渐变和颜色,startColor和endColor属性可以设置渐变色值
 ##### <4>:在敌人开始生成的位置,地图瓦片闪烁期间,在瓦片坐标击杀其他敌人,导致瓦片颜色为红色消除不掉的问题:在相同位置连续生成敌人,瓦片颜色置为oriColor,但是oriColor赋值为tile.color,此颜色不一定为真正的初始色,需要修改为Color.white
 
-### 9.DEVELOP MODE 键位说明
+### 10.DEVELOP MODE 键位说明
 
 ##### · Enter 跳过当前波
