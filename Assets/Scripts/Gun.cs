@@ -9,6 +9,7 @@ public class Gun : MonoBehaviour {
         Burst, //点射
         Single,//单点
     }
+    private int curFireModeIndex = 1;
     public int clipCount;//弹夹子弹容量
     public int clipRemainBulletCount;//当前弹夹剩余子弹数量
     public int burstCount;//点射子弹数量
@@ -41,6 +42,7 @@ public class Gun : MonoBehaviour {
         muzzleFlash = GetComponent<MuzzleFlash>();
         bullet = Resources.Load<GameObject>("Prefabs/Bullet").GetComponent<Bullet>();
         shell = Resources.Load<GameObject>("Prefabs/Shell").transform;
+        fireMode = FireMode.Auto;
 
         shotsRemainInBurst = burstCount;
     }
@@ -74,12 +76,15 @@ public class Gun : MonoBehaviour {
     private void Shoot() {
         //没有在装填,时间上满足射击间隔,并且弹夹剩余子弹不为0
         if (!isClipReloading && Time.time > nextShotTime && clipRemainBulletCount > 0) {
+            curFireModeIndex = 1;
             if (fireMode == FireMode.Burst) {
+                curFireModeIndex = 2;
                 if (shotsRemainInBurst == 0) {
                     return;
                 }
                 shotsRemainInBurst--;
             } else if (fireMode == FireMode.Single) {
+                curFireModeIndex = 3;
                 if (!triggerRelease) {
                     return;
                 }
@@ -152,6 +157,10 @@ public class Gun : MonoBehaviour {
     /// </summary>
     public void SwitchFireMode() {
         string str = "";
+        int nextModeIndex = curFireModeIndex + 1 > 3 ? curFireModeIndex - 2 : curFireModeIndex + 1;
+        curFireModeIndex = nextModeIndex;
+        print(curFireModeIndex);
+        fireMode = NumberToFireMode(curFireModeIndex);
         if (isClipReloading) {
             str = "装填弹药中...";
         } else {
@@ -168,5 +177,15 @@ public class Gun : MonoBehaviour {
             default: res = "自动"; break;
         }
         return res;
+    }
+    public FireMode NumberToFireMode(int index) {
+        FireMode mode = FireMode.Auto;
+        switch (index) {
+            case 1: mode = FireMode.Auto; break;
+            case 2: mode = FireMode.Burst; break;
+            case 3: mode = FireMode.Single; break;
+            default: mode = FireMode.Auto; break;
+        }
+        return mode;
     }
 }
