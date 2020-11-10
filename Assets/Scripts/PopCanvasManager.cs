@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -77,7 +78,7 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
         GameObject pop = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/UI/PopMessagePanel"), popMessageTrs);
         //print(popMessageTrs == null);
         pop.transform.localPosition = pos;
-        string hexColor = "ffffff";
+        string hexColor = ColorUtility.ToHtmlStringRGB(color);
         string addColorMsg = "<color=#" + hexColor + ">" + msg + "</color>";
         Text txt = Utils.FindObj<Text>(pop.transform, "Text");
         txt.text = addColorMsg;

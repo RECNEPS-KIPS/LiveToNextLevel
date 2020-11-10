@@ -59,6 +59,13 @@ public void AddTorque(Vector3 torque, ForceMode mode = ForceMode.Force);
 ```    
 ##### <3>Random.insideUnitSphere 返回单位球内一个随机点(only read)
 ##### <4>Cursor.visible = true; 设置光标是否可见
+##### <5> 颜色的转换:
+```csharp
+ColorUtility.ToHtmlStringRGB(color);//将color对象转换成十六进制
+Color nowColor;
+ColorUtility.TryParseHtmlString("#FECEE1", out nowColor);//将十六进制字符串转换为color对象
+
+```    
 
 #### 7.组件
 ##### <1>Trail Renderer(轨迹渲染器)组件 用来做轨迹跟踪,渲染轨迹弹道

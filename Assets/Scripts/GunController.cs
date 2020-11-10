@@ -76,4 +76,10 @@ public class GunController : MonoBehaviour {
         }
     }
 
+    public void SwitchFireMode() {
+        if (equippedGun != null) {
+            equippedGun.SwitchFireMode();
+        }
+    }
+
 }

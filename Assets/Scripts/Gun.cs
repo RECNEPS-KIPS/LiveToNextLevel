@@ -146,4 +146,27 @@ public class Gun : MonoBehaviour {
         triggerRelease = true;
         shotsRemainInBurst = burstCount;
     }
+
+    /// <summary>
+    /// 切换开火模式
+    /// </summary>
+    public void SwitchFireMode() {
+        string str = "";
+        if (isClipReloading) {
+            str = "装填弹药中...";
+        } else {
+            str = FireModeToName(fireMode);
+        }
+        GameManager.Instance.popCanvasManager.PopMessage(Vector3.zero, "切换到" + str + "模式", Color.white);
+    }
+    public string FireModeToName(FireMode mode) {
+        string res = "";
+        switch (mode) {
+            case FireMode.Auto: res = "自动"; break;
+            case FireMode.Burst: res = "点射"; break;
+            case FireMode.Single: res = "单点"; break;
+            default: res = "自动"; break;
+        }
+        return res;
+    }
 }
