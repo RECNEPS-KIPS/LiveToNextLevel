@@ -84,7 +84,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clipCount: 30
   clipRemainBulletCount: 0
-  burstCount: 5
+  burstCount: 3
   shotsRemainInBurst: 0
   fireMode: 0
   fireTrs:

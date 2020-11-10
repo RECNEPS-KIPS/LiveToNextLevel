@@ -159,7 +159,7 @@ public class Gun : MonoBehaviour {
         string str = "";
         int nextModeIndex = curFireModeIndex + 1 > 3 ? curFireModeIndex - 2 : curFireModeIndex + 1;
         curFireModeIndex = nextModeIndex;
-        print(curFireModeIndex);
+        //print(curFireModeIndex);
         fireMode = NumberToFireMode(curFireModeIndex);
         if (isClipReloading) {
             str = "装填弹药中...";
@@ -168,6 +168,11 @@ public class Gun : MonoBehaviour {
         }
         GameManager.Instance.popCanvasManager.PopMessage(Vector3.zero, "切换到" + str + "模式", Color.white);
     }
+    /// <summary>
+    /// 开火模式转中文名称
+    /// </summary>
+    /// <param name="mode"></param>
+    /// <returns></returns>
     public string FireModeToName(FireMode mode) {
         string res = "";
         switch (mode) {
@@ -178,6 +183,11 @@ public class Gun : MonoBehaviour {
         }
         return res;
     }
+    /// <summary>
+    /// 武器模式索引转开火模式枚举类型
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
     public FireMode NumberToFireMode(int index) {
         FireMode mode = FireMode.Auto;
         switch (index) {

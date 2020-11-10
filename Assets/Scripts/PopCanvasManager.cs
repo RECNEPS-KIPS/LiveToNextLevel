@@ -42,7 +42,7 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
 
     }
     /// <summary>
-    /// 渐显协程
+    /// 处理game over面板渐显
     /// </summary>
     /// <param name="cur">当前颜色</param>
     /// <param name="tar">目标颜色</param>
@@ -87,17 +87,55 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
         CanvasGroup canvas = Utils.FindObj<CanvasGroup>(pop.transform, null);
         StartCoroutine(PopMessagePanelFadeAndPop(pop, canvas, 1f, 50));
     }
+    /// <summary>
+    /// popTips渐隐上浮协程
+    /// </summary>
+    /// <param name="pop"></param>
+    /// <param name="canvas"></param>
+    /// <param name="fadeTime"></param>
+    /// <param name="moveSpeed"></param>
+    /// <returns></returns>
     IEnumerator PopMessagePanelFadeAndPop(GameObject pop, CanvasGroup canvas, float fadeTime, float moveSpeed) {
-        float alphaPercent = 1;
+        float percent = 0;
         float y = 0;
         Destroy(pop, fadeTime + 0.5f);
         float fadeSpeed = 1 / fadeTime;
-        while (alphaPercent > 0) {
+        while (percent < 1) {
             y += Time.deltaTime * fadeSpeed * moveSpeed;
             pop.transform.localPosition = new Vector3(0, y, 0);
-            alphaPercent -= Time.deltaTime * fadeSpeed;
-            canvas.alpha = Mathf.Lerp(0, 1, alphaPercent);
+            percent += Time.deltaTime * fadeSpeed;
+            canvas.alpha = Mathf.Lerp(1, 0, percent);
             yield return null;
         }
+    }
+
+    public void OpenGMPanel() {
+        Transform gmPanel = Utils.FindObj<Transform>(transform, "GM");
+        gmPanel.localScale = Vector3.zero;
+        gmPanel.gameObject.SetActive(true);
+        Utils.FindObj<Button>(gmPanel.transform, "ModeBtn").onClick.AddListener(delegate () {
+            SetToggleState();
+        });
+        StartCoroutine(GMPanelScaleAnimate(gmPanel, 0.5f));
+    }
+    IEnumerator GMPanelScaleAnimate(Transform gm, float gmScaleTime) {
+        float percent = 0;
+        float speed = 1 / gmScaleTime;
+        float y = 0;
+        Cursor.visible = true;
+        //Invoke("SetTimeScale", gmScaleTime);
+        while (percent < 1) {
+            percent += Time.deltaTime * speed;
+            y = (-5 / 2.0f) * percent * percent + (7 / 2.0f) * percent;
+            // print(y);
+            gm.localScale = new Vector3(y, y, 1);
+            yield return null;
+        }
+    }
+    void SetTimeScale() {
+        Time.timeScale = 0;
+    }
+    public void SetToggleState() {
+        // print("?s??");
     }
 }

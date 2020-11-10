@@ -19,12 +19,12 @@ public class GameManager : BaseSingleton<GameManager> {
         if (Input.GetKeyDown(KeyCode.G)) {
             if (!isGMPanelShow) {
                 //print("show gm panel");
+                popCanvasManager.OpenGMPanel();
             } else {
                 //print("hide gm panel");
             }
             isGMPanelShow = !isGMPanelShow;
             gamePause = isGMPanelShow;
-            Time.timeScale = isGMPanelShow ? 0 : 1;
         }
     }
 }
