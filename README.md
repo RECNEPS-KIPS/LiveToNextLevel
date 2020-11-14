@@ -82,6 +82,6 @@ ColorUtility.TryParseHtmlString("#FECEE1", out nowColor);//将十六进制字符
 ##### <4>:在敌人开始生成的位置,地图瓦片闪烁期间,在瓦片坐标击杀其他敌人,导致瓦片颜色为红色消除不掉的问题:在相同位置连续生成敌人,瓦片颜色置为oriColor,但是oriColor赋值为tile.color,此颜色不一定为真正的初始色,需要修改为Color.white
 ##### <5>:UI等响应鼠标事件,UI Canvas底下必须要有EventSystem
 
-### 10.DEVELOP MODE 键位说明
+### 10.DEVELOP MODE 开发者模式键位说明
 
 ##### · Enter 跳过当前波
