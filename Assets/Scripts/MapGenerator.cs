@@ -57,7 +57,6 @@ public class MapGenerator : MonoBehaviour {
         }
         //洗牌
         shuffledTileCoords = new Queue<Coord>(Utils.ShuffleCoords<Coord>(allTileCoords.ToArray(), currentMap.seed));
-
         //先销毁旧的地图,若存在
         string holderName = "MapHolder";
         if (transform.Find(holderName)) {

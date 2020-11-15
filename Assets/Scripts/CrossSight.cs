@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class CrossSight : MonoBehaviour {
     Transform dot;
     public LayerMask targetLayer;//检测标记层
@@ -24,5 +23,6 @@ public class CrossSight : MonoBehaviour {
         } else {
             dotSpriteRenderer.color = dotOriColor;
         }
+        
     }
 }
