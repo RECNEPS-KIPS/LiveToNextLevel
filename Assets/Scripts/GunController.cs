@@ -10,7 +10,7 @@ public class GunController : MonoBehaviour {
     void Start() {
         weaponHolder = transform.Find("WeaponHolder");
         //Debug.Log(weaponHolder == null);
-        defaultGun = Resources.Load<GameObject>("Prefabs/Weapon/Gun/Gun1").GetComponent<Gun>();
+        defaultGun = Resources.Load<GameObject>("Prefabs/Weapon/Gun/Gun2").GetComponent<Gun>();
         if (defaultGun != null) {
             EquipGun(defaultGun);
         }
