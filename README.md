@@ -81,6 +81,7 @@ ColorUtility.TryParseHtmlString("#FECEE1", out nowColor);//将十六进制字符
 ##### <3>:Trail Renderer颜色的设置,Color属性调节渐变和颜色,startColor和endColor属性可以设置渐变色值
 ##### <4>:在敌人开始生成的位置,地图瓦片闪烁期间,在瓦片坐标击杀其他敌人,导致瓦片颜色为红色消除不掉的问题:在相同位置连续生成敌人,瓦片颜色置为oriColor,但是oriColor赋值为tile.color,此颜色不一定为真正的初始色,需要修改为Color.white
 ##### <5>:UI等响应鼠标事件,UI Canvas底下必须要有EventSystem
+##### <6>:暂停游戏的TimeScale,需要解决连同界面UI动画一并暂停的问题
 
 ### 10.DEVELOP MODE 开发者模式键位说明
 
