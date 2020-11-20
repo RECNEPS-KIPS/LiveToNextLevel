@@ -489,7 +489,7 @@ GameObject:
   - component: {fileID: 1180489510616344957}
   - component: {fileID: 8060369585268717478}
   m_Layer: 0
-  m_Name: PistolGun
+  m_Name: Gun1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -532,7 +532,6 @@ MonoBehaviour:
   fireMode: 2
   fireTrs:
   - {fileID: 5440516055941632322}
-  - {fileID: 0}
   bullet: {fileID: 0}
   msBetweenShots: 100
   fireSpeed: 10

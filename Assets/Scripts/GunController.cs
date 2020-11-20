@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour {
     public Gun equippedGun;
-    public Gun defaultGun;
+    public Gun[] allGuns;
     public Transform weaponHolder;
 
-    void Start() {
+    public void Awake() {
         weaponHolder = transform.Find("WeaponHolder");
+    }
+    void Start() {
         //Debug.Log(weaponHolder == null);
-        defaultGun = Resources.Load<GameObject>("Prefabs/Weapon/Gun/Gun2").GetComponent<Gun>();
-        if (defaultGun != null) {
-            EquipGun(defaultGun);
-        }
+        // defaultGun = Resources.Load<GameObject>("Prefabs/Weapon/Gun/Gun2").GetComponent<Gun>();
+        // if (defaultGun != null) {
+        //     EquipGun(defaultGun);
+        // }
     }
     /// <summary>
     /// 装备武器
@@ -27,6 +29,14 @@ public class GunController : MonoBehaviour {
         //实例化武器预制体
         equippedGun = Instantiate(gunToEquip, weaponHolder.position, weaponHolder.rotation) as Gun;
         equippedGun.transform.parent = weaponHolder;
+    }
+
+    /// <summary>
+    /// 重写装备函数
+    /// </summary>
+    /// <param name="gunIndex">装备的武器索引</param>
+    public void EquipGun(int gunIndex) {
+        EquipGun(allGuns[gunIndex]);
     }
 
     /// <summary>
