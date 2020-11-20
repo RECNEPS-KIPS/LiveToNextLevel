@@ -12,16 +12,23 @@ public class Player : LivingEntity {
     public Transform crossSightTrs;//十字瞄具
     float gunHeight;//持有武器的高度
     public CrossSight crossSight;
+    public Spawner spawner;
 
-    // Start is called before the first frame update
-    protected override void Start() {
-        base.Start();
+    private void Awake() {
         playerController = GetComponent<PlayerController>();
         gunController = GetComponent<GunController>();
         crossSightTrs = Utils.FindObj<Transform>("CrossSight");
         crossSight = crossSightTrs.GetComponent<CrossSight>();
         viewCamera = Camera.main;
         gunHeight = gunController.GetGunHeight();
+
+        spawner = FindObjectOfType<Spawner>();
+        spawner.OnNewWave += OnNewWave;//订阅spawner开启下一波的事件
+    }
+
+    // Start is called before the first frame update
+    protected override void Start() {
+        base.Start();
     }
 
     // Update is called once per frame
@@ -62,5 +69,14 @@ public class Player : LivingEntity {
         if (Input.GetKeyDown(KeyCode.X)) {
             gunController.SwitchFireMode();
         }
+    }
+    
+    /// <summary>
+    /// 处理spawner开启下一波时的逻辑
+    /// </summary>
+    /// <param name="waveNumber"></param>
+    public void OnNewWave(int waveNumber){
+        HP = startHP;//下一波时恢复血量
+        gunController.EquipGun(waveNumber - 1);
     }
 }

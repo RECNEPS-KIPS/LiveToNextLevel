@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour {
     Vector3 lastCampPos;//上一次玩家长时间停留的位置
     bool isCamp;
     bool isDisable;
-    public event System.Action<int> OnNewWave;
+    public event System.Action<int> OnNewWave;//下一波的事件
 
     private int aliveEnemies;//剩余存活的敌人
     //public event System.Action<int> OnNewWave;
