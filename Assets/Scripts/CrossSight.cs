@@ -17,6 +17,11 @@ public class CrossSight : MonoBehaviour {
     void Update() {
         transform.Rotate(Vector3.forward * 40 * Time.deltaTime);
     }
+
+    /// <summary>
+    /// 检测目标点
+    /// </summary>
+    /// <param name="ray">射线</param>
     public void CheckTarget(Ray ray) {
         if (Physics.Raycast(ray, 100, targetLayer)) {//检测到目标中心点高亮
             dotSpriteRenderer.color = dotHeightColor;
