@@ -12,6 +12,14 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
     Color fadePanelColor;
     Button againBtn;
     Transform popMessageTrs;
+    public Text newWaveTitle;
+    public Text newWaveCount;
+    Spawner spawner;
+    public RectTransform newWaveBanner;
+    private void Awake() {
+        spawner = FindObjectOfType<Spawner>();
+        spawner.OnNewWave += OnNewWave;
+    }
     void Start() {
         popMessageTrs = Utils.FindObj<Transform>(transform, "PopMessageTrs");
         fadePanel = transform.Find("FadeInOutMask").transform;
@@ -23,7 +31,52 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
         againBtn.onClick.AddListener(delegate () {
             PlayAgain();
         });
+        newWaveBanner = Utils.FindObj<RectTransform>(transform, "WaveTipsBanner");
+        newWaveTitle = Utils.FindObj<RectTransform>(newWaveBanner.transform, "WaveText").GetComponent<Text>();
+        newWaveCount = Utils.FindObj<RectTransform>(newWaveBanner.transform, "EnemyCountText").GetComponent<Text>();
     }
+
+    /// <summary>
+    /// 下一波敌人的UI触发事件
+    /// </summary>
+    /// <param name="waveNumber"></param>
+    void OnNewWave(int waveNumber) {
+        newWaveTitle.text = "- 第" + waveNumber + "波敌人来袭 - ";
+        string str = "";
+        if (spawner.waves[waveNumber - 1].enemyCount < 0) {
+            str = "无限";
+        }
+        else {
+            str = spawner.waves[waveNumber - 1].enemyCount + "";
+        }
+        newWaveCount.text = "数量:" + str;
+        StartCoroutine(WaveTipsBanner());
+    }
+
+    /// <summary>
+    /// 波数提示Banner
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator WaveTipsBanner() {
+        float delayTime = 1f;
+        float animePercent = 0;
+        float speed = 2.5f;
+        int dir = 1;
+        float endDelayTime = Time.time + 1 / speed + delayTime;
+        while (animePercent >= 0) {
+            animePercent += Time.deltaTime * speed * dir;
+            if (animePercent >= 1) {
+                animePercent = 1;
+                if (Time.time > endDelayTime) {
+                    dir = -1;
+                }
+            }
+
+            newWaveBanner.anchoredPosition = Vector2.up * Mathf.Lerp(-130, 200, animePercent);
+            yield return null;
+        }
+    }
+
 
     void Update() {
 
