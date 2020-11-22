@@ -40,8 +40,8 @@ public class Gun : MonoBehaviour {
         clipRemainBulletCount = clipCount;
         isClipReloading = false;
         muzzleFlash = GetComponent<MuzzleFlash>();
-        bullet = Resources.Load<GameObject>("Prefabs/Bullet").GetComponent<Bullet>();
-        shell = Resources.Load<GameObject>("Prefabs/Shell").transform;
+        bullet = Resources.Load<GameObject>("Prefabs/Common/Bullet").GetComponent<Bullet>();
+        shell = Resources.Load<GameObject>("Prefabs/Common/Shell").transform;
         fireMode = FireMode.Auto;
 
         shotsRemainInBurst = burstCount;

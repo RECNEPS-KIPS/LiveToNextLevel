@@ -11170,7 +11170,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -418}
+  m_AnchoredPosition: {x: 0, y: -413.7}
   m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &683416485
@@ -19901,7 +19901,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -460.9}
+  m_AnchoredPosition: {x: 0, y: -456.60004}
   m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1129707481
@@ -22099,14 +22099,14 @@ MonoBehaviour:
     timeBetweenSpawns: 1
     moveSpeed: 2
     hitsToKillPlayer: 5
-    enemyHP: 2
+    enemyHP: 1
     skinColor: {r: 1, g: 0, b: 0, a: 0}
   - infinate: 0
     enemyCount: 10
     timeBetweenSpawns: 0.75
     moveSpeed: 3
     hitsToKillPlayer: 20
-    enemyHP: 4
+    enemyHP: 1
     skinColor: {r: 0, g: 0.13428664, b: 1, a: 0}
   - infinate: 1
     enemyCount: -1

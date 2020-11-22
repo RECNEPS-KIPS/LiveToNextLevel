@@ -32,7 +32,7 @@ public class Spawner : MonoBehaviour {
         lastCampPos = playerTrs.position;
 
         map = FindObjectOfType<MapGenerator>();//获取地图
-        enemy = Resources.Load<GameObject>("Prefabs/Enemy").GetComponent<Enemy>();//获取敌人预制体
+        enemy = Resources.Load<GameObject>("Prefabs/Common/Enemy").GetComponent<Enemy>();//获取敌人预制体
         NextWave();
     }
 

@@ -45,8 +45,7 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
         string str = "";
         if (spawner.waves[waveNumber - 1].enemyCount < 0) {
             str = "无限";
-        }
-        else {
+        } else {
             str = spawner.waves[waveNumber - 1].enemyCount + "";
         }
         newWaveCount.text = "数量:" + str;

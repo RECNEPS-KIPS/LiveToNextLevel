@@ -23,6 +23,11 @@ public class MapGenerator : MonoBehaviour {
 
     Map currentMap;
 
+    private void Awake() {
+        tilePrefab = Resources.Load<Transform>("Prefabs/Common/Tile");
+        navMeshObs = Resources.Load<Transform>("Prefabs/Common/NavMeshObs");
+        obsPrefab = Resources.Load<Transform>("Prefabs/Common/Obstacle");
+    }
     void Start() {
         GenerateMap();
         FindObjectOfType<Spawner>().OnNewWave += OnNewWave;//订阅下一波敌人事件,生成新的地图
