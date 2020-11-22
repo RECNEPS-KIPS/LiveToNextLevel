@@ -50,7 +50,8 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
             str = spawner.waves[waveNumber - 1].enemyCount + "";
         }
         newWaveCount.text = "数量:" + str;
-        StartCoroutine(WaveTipsBanner());
+        StopCoroutine("WaveTipsBanner");
+        StartCoroutine("WaveTipsBanner");
     }
 
     /// <summary>
@@ -58,9 +59,9 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
     /// </summary>
     /// <returns></returns>
     IEnumerator WaveTipsBanner() {
-        float delayTime = 1f;
+        float delayTime = 1.5f;//顶部停留时间
         float animePercent = 0;
-        float speed = 2.5f;
+        float speed = 3f;
         int dir = 1;
         float endDelayTime = Time.time + 1 / speed + delayTime;
         while (animePercent >= 0) {
@@ -71,7 +72,6 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
                     dir = -1;
                 }
             }
-
             newWaveBanner.anchoredPosition = Vector2.up * Mathf.Lerp(-130, 200, animePercent);
             yield return null;
         }
