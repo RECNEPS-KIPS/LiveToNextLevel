@@ -24,7 +24,9 @@
 
 #### 5.PopCanvasManager类,处理popCanvas层的UI逻辑,目前包含弹出浮动Tips的接口
 
-#### 6.部分接口说明
+#### 6.音频模块的添加,音频管理
+
+#### 7.部分接口说明
 ##### <1>Physics.OverlapSphere方法
 ```csharp
 Physics.OverlapSphere(transform.position, 0.1f, collisionMask);
@@ -67,15 +69,15 @@ ColorUtility.TryParseHtmlString("#FECEE1", out nowColor);//将十六进制字符
 
 ```    
 
-#### 7.组件
+#### 8.组件
 ##### <1>Trail Renderer(轨迹渲染器)组件 用来做轨迹跟踪,渲染轨迹弹道
 
-#### 8.机制:
+#### 9.机制:
 ##### <1>类挂机检测:玩家长时间在某一处静止不动,或者攻击时持续逗留在某地超过一定时间被检测到,在玩家附近生成敌人,增加紧张感
 ##### <2>武器系统:增加开火模式,点射,自动,单点三种模式
 ##### <3>双开火点,两个枪口都可以发射子弹
 
-#### 9.问题:
+#### 10.问题:
 ##### <1>:获取物体的Renderer组件的material.color属性的Alpha通道值来改变预制体的颜色透明度,必须将material的(Renderring Mode)渲染模式修改为Fade模式
 ##### <2>:VsCode无法自动引用脚本命名空间导致编译器报错的解决方案,工程中删掉Assembly-CSharp.csproj文件,Unity中首选项中将编译器设置为Visual Studio,重新生成所有的csproj文件(Regenerate all csproj files),再将默认编译器切换为VsCode
 ##### <3>:Trail Renderer颜色的设置,Color属性调节渐变和颜色,startColor和endColor属性可以设置渐变色值
@@ -83,7 +85,6 @@ ColorUtility.TryParseHtmlString("#FECEE1", out nowColor);//将十六进制字符
 ##### <5>:UI等响应鼠标事件,UI Canvas底下必须要有EventSystem
 ##### <6>:暂停游戏的TimeScale,需要解决连同界面UI动画一并暂停的问题
 ##### <7>:DEVELOP MODE的接入问题
-
-### 10.DEVELOP MODE 开发者模式键位说明
+### 11.DEVELOP MODE 开发者模式键位说明
 
 ##### · Enter 跳过当前波的进度

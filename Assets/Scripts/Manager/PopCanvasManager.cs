@@ -161,6 +161,7 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
         }
     }
 
+    ///打开GM面板
     public void OpenGMPanel() {
         Transform gmPanel = Utils.FindObj<Transform>(transform, "GM");
         gmPanel.localScale = Vector3.zero;
