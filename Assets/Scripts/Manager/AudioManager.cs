@@ -22,7 +22,21 @@ public class AudioManager : MonoBehaviour {
 
     //淡入淡出音轨
     public void PlayMusic(AudioClip clip, float fadeDuration = 1) {
+        activeMusicSourceIndex = 1 - activeMusicSourceIndex;//始终得到 0 1 脉冲值
+        musicSources[activeMusicSourceIndex].clip = clip;
+        musicSources[activeMusicSourceIndex].Play();
 
+        StartCoroutine(MusicFadeInOutPlay(fadeDuration));
+    }
+    //执行音轨播放淡入淡出的协程
+    IEnumerator MusicFadeInOutPlay(float duration) {
+        float percent = 0;
+        while (percent < 1) {
+            percent += Time.deltaTime * 1 / duration;//时间微分值 * 1 / 持续时间
+            musicSources[activeMusicSourceIndex].volume = Mathf.Lerp(0, mainVolumePercent * mainVolumePercent, percent);//激活音轨淡入
+            musicSources[1 - activeMusicSourceIndex].volume = Mathf.Lerp(mainVolumePercent * mainVolumePercent, 0, percent);//暂停音轨淡出
+            yield return null;
+        }
     }
 
     //播放音频文件 在pos位置
