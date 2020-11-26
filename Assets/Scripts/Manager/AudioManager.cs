@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿// author:KIPKIPS
+// time:2020.11.25 22:31:18
+// describe:音频管理模块
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour {
+public class AudioManager : BaseSingleton<AudioManager> {
     float mainVolumePercent = 1;//主音量百分比
     float sfxVolumePercent = 1;//特技效果(Special Effects Cinematography)音量占比
     float musicVolumePercent = 1;//音乐音量占比
@@ -10,7 +13,7 @@ public class AudioManager : MonoBehaviour {
     //使用多个音频轨道,以便于在多个音轨上淡入淡出
     AudioSource[] musicSources;
     int activeMusicSourceIndex;//激活的音轨
-
+    
     void Awake() {
         musicSources = new AudioSource[2];
         for (var i = 0; i < 2; i++) {

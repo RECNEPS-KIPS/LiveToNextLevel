@@ -90,8 +90,8 @@ public class Spawner : MonoBehaviour {
         }
 
         Enemy spawnEnemy = GameObject.Instantiate(enemy, randomTile.position + Vector3.up, Quaternion.identity) as Enemy;
-        spawnEnemy.OnDeath += OnEnemyDeath;//订阅事件
         spawnEnemy.SetCharacter(curWave.moveSpeed, curWave.hitsToKillPlayer, curWave.enemyHP, curWave.skinColor);
+        spawnEnemy.OnDeath += OnEnemyDeath;//订阅事件
     }
 
 

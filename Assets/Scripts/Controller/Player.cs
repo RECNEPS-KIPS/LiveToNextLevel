@@ -70,12 +70,12 @@ public class Player : LivingEntity {
             gunController.SwitchFireMode();
         }
     }
-    
+
     /// <summary>
     /// 处理spawner开启下一波时的逻辑
     /// </summary>
     /// <param name="waveNumber"></param>
-    public void OnNewWave(int waveNumber){
+    public void OnNewWave(int waveNumber) {
         HP = startHP;//下一波时恢复血量
         gunController.EquipGun(waveNumber - 1);
     }

@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿// author:KIPKIPS
+// time:2020.10.01 15:12:56
+// describe:游戏管理者
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

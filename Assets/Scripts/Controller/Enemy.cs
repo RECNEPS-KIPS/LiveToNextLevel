@@ -52,6 +52,7 @@ public class Enemy : LivingEntity {
             targetEntity.OnDeath += OnTargetDeath;//订阅目标死亡事件
             StartCoroutine(UpdatePath());//开启寻路协程,防止每一帧都执行寻路
         }
+        //print(startHP);
     }
 
     /// <summary>
@@ -144,6 +145,7 @@ public class Enemy : LivingEntity {
         if (hasTarget) {
             damage = Mathf.Ceil(targetEntity.startHP / hitsTimes);
             startHP = enemyHP;
+            //print(startHP);
             mat = GetComponent<Renderer>().material;
             mat.color = skin;
             oriColor = mat.color;//初始颜色

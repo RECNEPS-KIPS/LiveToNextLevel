@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Bullet : MonoBehaviour {
     public Color trailColor;
-    public float speed = 10f;
+    public float speed = 6f;
     public LayerMask collisionMask;//检测碰撞的layer
-    private float damage = 1;
+    public float damage = 2;
     private float existTime = 3.0f;//在场景保存的时间
 
     private float skinWidth = 0;

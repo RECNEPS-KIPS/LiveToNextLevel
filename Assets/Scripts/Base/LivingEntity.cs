@@ -8,8 +8,12 @@ using UnityEngine;
 public class LivingEntity : MonoBehaviour, IDamageable {
     protected float HP;
     protected bool dead;//是否死亡
-    public float startHP;
+    public float startHP = 5;
     public event System.Action OnDeath;//生命体死亡事件
+    protected void Awake() {
+
+        dead = false;
+    }
     protected virtual void Start() {
         HP = startHP;
     }
@@ -19,6 +23,7 @@ public class LivingEntity : MonoBehaviour, IDamageable {
     /// <param name="damage">伤害数值</param>
     public void TakeDamage(float damage) {
         //print("hit1");
+        print(damage + "_" + dead);
         HP -= damage;
         if (HP <= 0 && !dead) {
             Die();

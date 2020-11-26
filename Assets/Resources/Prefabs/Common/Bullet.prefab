@@ -101,6 +101,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 256
+  damage: 2
 --- !u!65 &-5714049548878166604
 BoxCollider:
   m_ObjectHideFlags: 0
