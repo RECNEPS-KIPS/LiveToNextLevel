@@ -13,8 +13,8 @@ public class AudioManager : BaseSingleton<AudioManager> {
     //使用多个音频轨道,以便于在多个音轨上淡入淡出
     AudioSource[] musicSources;
     int activeMusicSourceIndex;//激活的音轨
-    
-    void Awake() {
+
+    new void Awake() {
         musicSources = new AudioSource[2];
         for (var i = 0; i < 2; i++) {
             GameObject newMusicSource = new GameObject("Music Source " + (i + 1));//创建游戏对象

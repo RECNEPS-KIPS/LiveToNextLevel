@@ -10,8 +10,7 @@ public class LivingEntity : MonoBehaviour, IDamageable {
     protected bool dead;//是否死亡
     public float startHP = 5;
     public event System.Action OnDeath;//生命体死亡事件
-    protected void Awake() {
-
+    protected virtual void Awake() {
         dead = false;
     }
     protected virtual void Start() {

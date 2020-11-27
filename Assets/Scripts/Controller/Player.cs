@@ -14,7 +14,8 @@ public class Player : LivingEntity {
     public CrossSight crossSight;
     public Spawner spawner;
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         playerController = GetComponent<PlayerController>();
         gunController = GetComponent<GunController>();
         crossSightTrs = Utils.FindObj<Transform>("CrossSight");

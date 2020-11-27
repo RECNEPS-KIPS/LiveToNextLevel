@@ -22,8 +22,8 @@ public class Gun : MonoBehaviour {
 
     public Transform shell;//弹壳
     public Transform shellSpawner;//弹壳弹出点
-    private float nextShotTime;
-    public MuzzleFlash muzzleFlash;
+    private float nextShotTime;//下一次射击的时间
+    public MuzzleFlash muzzleFlash;//管理枪口的特效
     public Vector3 recoilSmoothDampVelocity;
     public float recoilRotSmoothDampVelocity;
     public float recoilAngle;
@@ -35,6 +35,10 @@ public class Gun : MonoBehaviour {
     bool triggerRelease;//标识扳机是否释放
     public float reloadTime = 0.1f;
     bool isClipReloading;//是否正在重新装填弹药
+
+    //处理音频的变量
+    public AudioClip shootAudio;
+    public AudioClip reloadAudio;
     void Start() {
         //初始化
         clipRemainBulletCount = clipCount;
@@ -42,8 +46,11 @@ public class Gun : MonoBehaviour {
         muzzleFlash = GetComponent<MuzzleFlash>();
         bullet = Resources.Load<GameObject>("Prefabs/Common/Bullet").GetComponent<Bullet>();
         shell = Resources.Load<GameObject>("Prefabs/Common/Shell").transform;
-        fireMode = FireMode.Auto;
 
+        shootAudio = Resources.Load<AudioClip>("Audio/Guns/GunShoot_1");
+        reloadAudio = Resources.Load<AudioClip>("Audio/Guns/GunReload_1");
+
+        fireMode = FireMode.Auto;
         shotsRemainInBurst = burstCount;
     }
 
@@ -103,6 +110,8 @@ public class Gun : MonoBehaviour {
             transform.localPosition -= Vector3.forward * Random.Range(kickTrsMinMax.x, kickTrsMinMax.y);//射击时位置后移,模拟后坐力
             recoilAngle += Random.Range(kickAngleMinMax.x, kickAngleMinMax.y);
             recoilAngle = Mathf.Clamp(recoilAngle, 0, 30);
+
+            AudioManager.Instance.PlayAudioClip(shootAudio, transform.position);//射击音效
         }
     }
 
@@ -113,6 +122,7 @@ public class Gun : MonoBehaviour {
         //未处于装填状态且弹夹不是满的
         if (!isClipReloading && clipRemainBulletCount != clipCount) {
             StartCoroutine(Reload());
+            AudioManager.Instance.PlayAudioClip(reloadAudio, transform.position);
         }
 
     }

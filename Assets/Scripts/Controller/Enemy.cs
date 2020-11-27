@@ -31,7 +31,8 @@ public class Enemy : LivingEntity {
     public ParticleSystem deathEffect;
     Renderer selfRenderer;
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         selfRenderer = GetComponent<Renderer>();
         pathFinder = GetComponent<NavMeshAgent>();//寻路组件
         deathEffect = Resources.Load<ParticleSystem>("Prefabs/Effects/EnemyDeathEffect");
