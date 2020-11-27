@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : BaseSingleton<AudioManager> {
-    float mainVolumePercent = 0.2f;//主音量百分比
-    float sfxVolumePercent = 1;//特技效果(Special Effects Cinematography)音量占比
+    float mainVolumePercent = 1f;//主音量百分比
+    float sfxVolumePercent = 0.2f;//特技效果(Special Effects Cinematography)音量占比
     float musicVolumePercent = 1;//音乐音量占比
 
     //使用多个音频轨道,以便于在多个音轨上淡入淡出
