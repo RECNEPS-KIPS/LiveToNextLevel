@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d73f6d83bca8246b1b67ca485ca984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHP: 5
+  startHP: 1
   pathFinder: {fileID: 0}
   timeBetweenAttack: 1
   deathEffect: {fileID: 0}

@@ -142,6 +142,7 @@ public class Enemy : LivingEntity {
     }
 
     public void SetCharacter(float moveSpeed, int hitsTimes, float enemyHP, Color skin) {
+        print(enemyHP);
         pathFinder.speed = moveSpeed;
         if (hasTarget) {
             damage = Mathf.Ceil(targetEntity.startHP / hitsTimes);
