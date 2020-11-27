@@ -46,7 +46,6 @@ public class Gun : MonoBehaviour {
         muzzleFlash = GetComponent<MuzzleFlash>();
         bullet = Resources.Load<GameObject>("Prefabs/Common/Bullet").GetComponent<Bullet>();
         shell = Resources.Load<GameObject>("Prefabs/Common/Shell").transform;
-
         shootAudio = Resources.Load<AudioClip>("Audio/Guns/GunShoot_1");
         reloadAudio = Resources.Load<AudioClip>("Audio/Guns/GunReload_1");
 
