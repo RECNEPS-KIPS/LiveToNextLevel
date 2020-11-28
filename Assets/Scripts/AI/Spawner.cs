@@ -118,7 +118,7 @@ public class Spawner : MonoBehaviour {
     /// </summary>
     void NextWave() {
         if (curWaveNum > 0) {
-            AudioManager.Instance.PlayAudioClip("LevelCompleted", Vector3.zero);
+            AudioManager.Instance.PlayPlayAudioClip2D("LevelCompleted");
         }
         curWaveNum++;
         //print("wave num:" + curWaveNum);

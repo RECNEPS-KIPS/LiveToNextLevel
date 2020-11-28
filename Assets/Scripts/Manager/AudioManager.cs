@@ -12,11 +12,12 @@ public class AudioManager : BaseSingleton<AudioManager> {
         Music,//音乐音量
     }
     public float mainVolumePercent = 1f;//主音量
-    public float sfxVolumePercent = 0.2f;//特殊音效(Special Effects Cinematography)音量占比
+    public float sfxVolumePercent = 0.2f;//2D音效音量占比
     public float musicVolumePercent = 1;//音乐音量占比
 
     //使用多个音频轨道,以便于在多个音轨上淡入淡出
     AudioSource[] musicSources;
+    AudioSource sfxSource;
 
     Transform playerTrs;
     Transform audioListenerTrs;
@@ -25,9 +26,6 @@ public class AudioManager : BaseSingleton<AudioManager> {
     SoundLibrary library;
 
     new void Awake() {
-        // if (Instance != null) {
-        //     Destroy(gameObject);
-        // } else {
         //加载保存的音量偏好数据
         DataSave data = DataManager.Instance.LoadDataByType(DataManager.DataType.Audio);
         if (data != null) {
@@ -36,13 +34,17 @@ public class AudioManager : BaseSingleton<AudioManager> {
             musicVolumePercent = data.volumeData.musicVolumePercent;
         }
 
-        //}
         musicSources = new AudioSource[2];
         for (var i = 0; i < 2; i++) {
             GameObject newMusicSource = new GameObject("Music Source " + (i + 1));//创建游戏对象
             musicSources[i] = newMusicSource.AddComponent<AudioSource>();
             newMusicSource.transform.parent = transform;
         }
+
+        GameObject newSfx2DSource = new GameObject("SFX 2D Music Source ");//创建对象
+        sfxSource = newSfx2DSource.AddComponent<AudioSource>();
+        newSfx2DSource.transform.parent = transform;
+
         audioListenerTrs = FindObjectOfType<AudioListener>().transform;
         playerTrs = FindObjectOfType<Player>().transform;
         library = GetComponent<SoundLibrary>();
@@ -103,5 +105,10 @@ public class AudioManager : BaseSingleton<AudioManager> {
         }
         //做数据的保存,存储玩家的音量偏好
         DataManager.Instance.SaveVolumeDataByChannel(channel, volumePercent);
+    }
+
+    //播放2D空间的音效,UI,关卡等音效
+    public void PlayPlayAudioClip2D(string soundName) {
+        sfxSource.PlayOneShot(library.GetClipFromName(soundName), sfxVolumePercent * mainVolumePercent);
     }
 }
