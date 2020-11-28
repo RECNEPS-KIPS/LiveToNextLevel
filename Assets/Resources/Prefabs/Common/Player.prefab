@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -4551443428416386781}
   - component: {fileID: -9055011481091860637}
   - component: {fileID: -3963396092468275207}
-  - component: {fileID: -8067936966843453090}
+  - component: {fileID: 4093923524969909454}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -147,7 +147,7 @@ MonoBehaviour:
   crossSightTrs: {fileID: 0}
   crossSight: {fileID: 0}
   spawner: {fileID: 0}
---- !u!114 &-8067936966843453090
+--- !u!114 &4093923524969909454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,12 +156,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2025535762975087622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d8a916eda84f6d459abe7d51047a10e, type: 3}
+  m_Script: {fileID: 11500000, guid: bd0edb41a206d8c4b9180bb1403f40ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   equippedGun: {fileID: 0}
-  allGuns: []
-  weaponHolder: {fileID: 0}
+  allGuns:
+  - {fileID: 1180489510616344957, guid: 038dafad94ba0654193c8217b734767e, type: 3}
+  - {fileID: 4893956971171960283, guid: dca29dcd347280c46834200a76a7a20b, type: 3}
+  - {fileID: 3410609415166517104, guid: 54247b59b7f37a74a9944e36079c7775, type: 3}
+  - {fileID: 6682914429113341176, guid: 8b81753d5598edd409e02e3f23940f27, type: 3}
+  - {fileID: 3857422730533548385, guid: 5a4d213d6c2020d4ea67d01b7243ee0a, type: 3}
+  weaponHolder: {fileID: 4694509147465023561}
 --- !u!1 &5966612266009408218
 GameObject:
   m_ObjectHideFlags: 0

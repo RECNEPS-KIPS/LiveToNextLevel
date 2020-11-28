@@ -11,6 +11,7 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
     Image fadeMask;
     Color fadePanelColor;
     Button againBtn;
+    Button closeGMBtn;
     Transform popMessageTrs;
     public Text newWaveTitle;
     public Text newWaveCount;
@@ -36,10 +37,7 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
         newWaveCount = Utils.FindObj<RectTransform>(newWaveBanner.transform, "EnemyCountText").GetComponent<Text>();
     }
 
-    /// <summary>
-    /// 下一波敌人的UI触发事件
-    /// </summary>
-    /// <param name="waveNumber"></param>
+    //下一波敌人的UI触发事件
     void OnNewWave(int waveNumber) {
         newWaveTitle.text = "- 第" + waveNumber + "波敌人来袭 - ";
         string str = "";
@@ -53,10 +51,7 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
         StartCoroutine("WaveTipsBanner");
     }
 
-    /// <summary>
     /// 波数提示Banner
-    /// </summary>
-    /// <returns></returns>
     IEnumerator WaveTipsBanner() {
         float delayTime = 1.5f;//顶部停留时间
         float animePercent = 0;
@@ -80,9 +75,8 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
     void Update() {
 
     }
-    /// <summary>
-    /// 弹出game over面板
-    /// </summary>
+
+    //弹出game over面板
     void OnGameOver() {
         //DontDestroyOnLoad(popCavas.gameObject);
         //print("Game Over");
@@ -93,13 +87,8 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
         StartCoroutine(GameOverPanelFade(curColor, tarColor, 1f));
 
     }
-    /// <summary>
-    /// 处理game over面板渐显
-    /// </summary>
-    /// <param name="cur">当前颜色</param>
-    /// <param name="tar">目标颜色</param>
-    /// <param name="time">渐显时间</param>
-    /// <returns></returns>
+
+    //处理game over面板渐显
     IEnumerator GameOverPanelFade(Color cur, Color tar, float time) {
         float speed = 1 / time;
         float percent = 0;
@@ -109,9 +98,7 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
             yield return null;
         }
     }
-    /// <summary>
-    /// play again的事件
-    /// </summary>
+    //play again的事件
     void PlayAgain() {
         //print("play again");
         SceneManager.LoadScene("Game");
@@ -120,12 +107,7 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
         fadePanel.gameObject.SetActive(false);
     }
 
-    /// <summary>
-    /// 上浮弹出框
-    /// </summary>
-    /// <param name="pos">弹出框的位置</param>
-    /// <param name="msg">弹出框展示的文本</param>
-    /// <param name="color">文本色号</param>
+    //上浮弹出框
     public void PopMessage(Vector3 pos, string msg, Color color) {
         GameObject pop = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/UI/PopMessagePanel"), popMessageTrs);
         //print(popMessageTrs == null);
@@ -139,14 +121,7 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
         CanvasGroup canvas = Utils.FindObj<CanvasGroup>(pop.transform, null);
         StartCoroutine(PopMessagePanelFadeAndPop(pop, canvas, 1f, 50));
     }
-    /// <summary>
-    /// popTips渐隐上浮协程
-    /// </summary>
-    /// <param name="pop"></param>
-    /// <param name="canvas"></param>
-    /// <param name="fadeTime"></param>
-    /// <param name="moveSpeed"></param>
-    /// <returns></returns>
+    //popTips渐隐上浮协程
     IEnumerator PopMessagePanelFadeAndPop(GameObject pop, CanvasGroup canvas, float fadeTime, float moveSpeed) {
         float percent = 0;
         float y = 0;
@@ -163,13 +138,21 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
 
     ///打开GM面板
     public void OpenGMPanel() {
+        print("open");
         Transform gmPanel = Utils.FindObj<Transform>(transform, "GM");
         gmPanel.localScale = Vector3.zero;
         gmPanel.gameObject.SetActive(true);
         Utils.FindObj<Button>(gmPanel.transform, "ModeBtn").onClick.AddListener(delegate () {
             SetToggleState();
         });
+        Utils.FindObj<Button>(gmPanel, "Panel").onClick.AddListener(delegate () {
+            CloseGMPanel(gmPanel);
+        });
         StartCoroutine(GMPanelScaleAnimate(gmPanel, 0.5f));
+    }
+    public void CloseGMPanel(Transform gmPanel) {
+        print("close");
+        gmPanel.gameObject.SetActive(false);
     }
     IEnumerator GMPanelScaleAnimate(Transform gm, float gmScaleTime) {
         float percent = 0;

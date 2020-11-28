@@ -16,28 +16,30 @@ public class DataManager : BaseSingleton<DataManager> {
 
     //用来保存音量数据
     public void SaveVolumeDataByChannel(AudioManager.AudioChannel channel, float value) {
-        DataSave data = JSONLoadByName("VolumeData");//需要覆盖旧的数据,所以这里加载存在的json文件
-
+        DataSave data = LoadDataByType(DataType.Audio);//需要覆盖旧的数据,所以这里加载存在的json文件
+        if (data == null) {
+            data = new DataSave();//第一次加载则创建新的对象
+        }
+        //print(data);
         //保存数据
         switch (channel) {
             case AudioManager.AudioChannel.Main:
-                data.volumeData.mainVolumePercent = value;
+                data.mainVolumePercent = value;
                 break;
             case AudioManager.AudioChannel.SFX:
-                data.volumeData.sfxVolumePercent = value;
+                data.sfxVolumePercent = value;
                 break;
             case AudioManager.AudioChannel.Music:
-                data.volumeData.musicVolumePercent = value;
+                data.musicVolumePercent = value;
                 break;
             default:
-                data.volumeData.mainVolumePercent = value;
+                data.mainVolumePercent = value;
                 break;
         }
-
         string filePath = Application.dataPath + "/GameData" + "/VolumeData.json";
         //将对象转化为字符串
         string jsonStr = JsonConvert.SerializeObject(data);
-        Console.WriteLine(jsonStr);
+        //print(jsonStr);
         //将转换过后的json字符串写入json文件
         StreamWriter writer = new StreamWriter(filePath);
         writer.Write(jsonStr);//写入文件
@@ -46,12 +48,13 @@ public class DataManager : BaseSingleton<DataManager> {
     }
     public DataSave JSONLoadByName(string fileName) {
         string filePath = Application.dataPath + "/GameData" + "/" + fileName + ".json";
+        //print(filePath);
         //读取文件
         StreamReader reader = new StreamReader(filePath);
         string jsonStr = reader.ReadToEnd();
         reader.Close();
         //Debug.Log(jsonStr);
-        //字符串转换为save对象
+        //字符串转换为DataSave对象
         DataSave data = JsonConvert.DeserializeObject<DataSave>(jsonStr);
         return data;
     }

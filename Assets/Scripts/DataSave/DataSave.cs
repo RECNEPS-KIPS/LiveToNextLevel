@@ -8,13 +8,9 @@ using UnityEngine;
 
 [System.Serializable]
 public class DataSave {
-    //存储音量数据的结构体
-    public struct VolumeData {
-        public float mainVolumePercent;
-        public float sfxVolumePercent;
-        public float musicVolumePercent;
-    }
-    public VolumeData volumeData;//音量数据保存结构体对象
-
+    //音量数据保存数据
+    public float mainVolumePercent;
+    public float sfxVolumePercent;
+    public float musicVolumePercent;
 
 }

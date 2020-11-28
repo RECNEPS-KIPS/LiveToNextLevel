@@ -4,6 +4,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.IO;
+using Newtonsoft.Json;
+using UnityEditor;
 
 public class AudioManager : BaseSingleton<AudioManager> {
     public enum AudioChannel {
@@ -26,12 +30,19 @@ public class AudioManager : BaseSingleton<AudioManager> {
     SoundLibrary library;
 
     new void Awake() {
+        SetVolume(1f, AudioChannel.Main);
+        SetVolume(0.2f, AudioChannel.SFX);
+        SetVolume(1f, AudioChannel.Music);
         //加载保存的音量偏好数据
         DataSave data = DataManager.Instance.LoadDataByType(DataManager.DataType.Audio);
         if (data != null) {
-            mainVolumePercent = data.volumeData.mainVolumePercent;
-            sfxVolumePercent = data.volumeData.sfxVolumePercent;
-            musicVolumePercent = data.volumeData.musicVolumePercent;
+            mainVolumePercent = data.mainVolumePercent;
+            sfxVolumePercent = data.sfxVolumePercent;
+            musicVolumePercent = data.musicVolumePercent;
+        } else { //默认的音量方案
+            mainVolumePercent = 1;
+            sfxVolumePercent = 0.2f;
+            musicVolumePercent = 1;
         }
 
         musicSources = new AudioSource[2];

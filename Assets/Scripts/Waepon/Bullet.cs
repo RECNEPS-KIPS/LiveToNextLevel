@@ -33,12 +33,10 @@ public class Bullet : MonoBehaviour {
         float moveDistance = Time.deltaTime * speed;
         CheckCollisions(moveDistance);
         transform.Translate(Vector3.forward * moveDistance);
+        transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
     }
 
-    /// <summary>
-    /// 检测碰撞
-    /// </summary>
-    /// <param name="moveDistance">检测距离</param>
+    //检测碰撞
     void CheckCollisions(float moveDistance) {
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
@@ -48,10 +46,7 @@ public class Bullet : MonoBehaviour {
         }
     }
 
-    /// <summary>
-    /// 碰撞触发
-    /// </summary>
-    /// <param name="hit">击中的目标</param>
+    //碰撞触发
     void OnHitObject(RaycastHit hit) {
         //print(hit.transform.gameObject.name);
         IDamageable damageObject = hit.collider.GetComponent<IDamageable>();
@@ -62,10 +57,7 @@ public class Bullet : MonoBehaviour {
         GameObject.Destroy(this.gameObject);
     }
 
-    /// <summary>
-    /// 重写碰撞触发方法
-    /// </summary>
-    /// <param name="collider"></param>
+    //重写碰撞触发方法
     void OnHitObject(Collider collider, Vector3 hitPoint) {
         IDamageable damageableObject = collider.GetComponent<IDamageable>();
         if (damageableObject != null) {

@@ -182,7 +182,7 @@ public class Gun : MonoBehaviour {
         } else {
             str = FireModeToName(fireMode);
         }
-        GameManager.Instance.popCanvasManager.PopMessage(Vector3.zero, "切换到" + str + "模式", Color.white);
+        FindObjectOfType<PopCanvasManager>().PopMessage(Vector3.zero, "切换到" + str + "模式", Color.white);
     }
     /// <summary>
     /// 开火模式转中文名称

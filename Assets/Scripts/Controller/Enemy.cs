@@ -70,7 +70,7 @@ public class Enemy : LivingEntity {
             AudioManager.Instance.PlayAudioClip("EnemyDeath", transform.position);
             GameObject effectObj = GameObject.Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDir));
             effectObj.GetComponent<Renderer>().material.color = selfRenderer.material.color;//死亡特效的材质球颜色设为敌人当前皮肤色
-            Destroy(effectObj, deathEffect.startLifetime);
+            Destroy(effectObj, deathEffect.main.startLifetimeMultiplier);
         }
         base.TakeHit(damage, hitPoint, hitDir);
     }
