@@ -22,7 +22,7 @@ public class LivingEntity : MonoBehaviour, IDamageable {
     /// <param name="damage">伤害数值</param>
     public void TakeDamage(float damage) {
         //print("hit1");
-        print(HP + "_" + dead);
+        //print(HP + "_" + dead);
         HP -= damage;
         if (HP <= 0 && !dead) {
             Die();
@@ -44,7 +44,7 @@ public class LivingEntity : MonoBehaviour, IDamageable {
     /// 处理死亡
     /// </summary>
     [ContextMenu("DestroySelf")]
-    public void Die() {
+    public virtual void Die() {
         //print("die");
         dead = true;
         if (OnDeath != null) {

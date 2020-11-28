@@ -525,9 +525,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8846283b2140a7149885aeac707df69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clipCount: 30
+  gunType: 1
+  clipCount: 10
   clipRemainBulletCount: 0
-  burstCount: 3
+  burstCount: 1
   shotsRemainInBurst: 0
   fireMode: 2
   fireTrs:
@@ -546,6 +547,8 @@ MonoBehaviour:
   recoilTrsRecoverTime: 0.1
   recoilAngleRecoverTime: 0.1
   reloadTime: 0.3
+  shootAudio: {fileID: 0}
+  reloadAudio: {fileID: 0}
 --- !u!114 &8060369585268717478
 MonoBehaviour:
   m_ObjectHideFlags: 0

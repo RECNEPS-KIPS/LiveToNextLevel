@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4893956971171960283}
   - component: {fileID: 4347957664749259520}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: Gun2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,6 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8846283b2140a7149885aeac707df69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunType: 3
   clipCount: 30
   clipRemainBulletCount: 0
   burstCount: 3
@@ -104,6 +105,8 @@ MonoBehaviour:
   recoilTrsRecoverTime: 0.1
   recoilAngleRecoverTime: 0.1
   reloadTime: 0.3
+  shootAudio: {fileID: 0}
+  reloadAudio: {fileID: 0}
 --- !u!114 &4347957664749259520
 MonoBehaviour:
   m_ObjectHideFlags: 0

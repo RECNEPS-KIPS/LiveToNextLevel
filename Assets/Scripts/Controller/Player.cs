@@ -80,4 +80,9 @@ public class Player : LivingEntity {
         HP = startHP;//下一波时恢复血量
         gunController.EquipGun(waveNumber - 1);
     }
+
+    public override void Die() {
+        base.Die();
+        AudioManager.Instance.PlayAudioClip("PlayerDeath", transform.position);
+    }
 }

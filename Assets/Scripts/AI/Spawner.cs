@@ -117,6 +117,9 @@ public class Spawner : MonoBehaviour {
     /// 开始制造下一波敌人
     /// </summary>
     void NextWave() {
+        if (curWaveNum > 0) {
+            AudioManager.Instance.PlayAudioClip("LevelCompleted", Vector3.zero);
+        }
         curWaveNum++;
         //print("wave num:" + curWaveNum);
         if (curWaveNum - 1 < waves.Length) {

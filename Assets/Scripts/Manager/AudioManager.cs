@@ -4,7 +4,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Newtonsoft.Json;
 
 public class AudioManager : BaseSingleton<AudioManager> {
     public enum AudioChannel {
@@ -12,9 +11,9 @@ public class AudioManager : BaseSingleton<AudioManager> {
         SFX,//效果音
         Music,//音乐音量
     }
-    float mainVolumePercent = 1f;//主音量百分比
-    float sfxVolumePercent = 0.2f;//特殊音效(Special Effects Cinematography)音量占比
-    float musicVolumePercent = 1;//音乐音量占比
+    public float mainVolumePercent = 1f;//主音量
+    public float sfxVolumePercent = 0.2f;//特殊音效(Special Effects Cinematography)音量占比
+    public float musicVolumePercent = 1;//音乐音量占比
 
     //使用多个音频轨道,以便于在多个音轨上淡入淡出
     AudioSource[] musicSources;
@@ -26,19 +25,27 @@ public class AudioManager : BaseSingleton<AudioManager> {
     SoundLibrary library;
 
     new void Awake() {
-        if (Instance != null) {
-            Destroy(gameObject);
-        } else {
-            musicSources = new AudioSource[2];
-            for (var i = 0; i < 2; i++) {
-                GameObject newMusicSource = new GameObject("Music Source " + (i + 1));//创建游戏对象
-                musicSources[i] = newMusicSource.AddComponent<AudioSource>();
-                newMusicSource.transform.parent = transform;
-            }
-            audioListenerTrs = FindObjectOfType<AudioListener>().transform;
-            playerTrs = FindObjectOfType<Player>().transform;
-            library = GetComponent<SoundLibrary>();
+        // if (Instance != null) {
+        //     Destroy(gameObject);
+        // } else {
+        //加载保存的音量偏好数据
+        DataSave data = DataManager.Instance.LoadDataByType(DataManager.DataType.Audio);
+        if (data != null) {
+            mainVolumePercent = data.volumeData.mainVolumePercent;
+            sfxVolumePercent = data.volumeData.sfxVolumePercent;
+            musicVolumePercent = data.volumeData.musicVolumePercent;
         }
+
+        //}
+        musicSources = new AudioSource[2];
+        for (var i = 0; i < 2; i++) {
+            GameObject newMusicSource = new GameObject("Music Source " + (i + 1));//创建游戏对象
+            musicSources[i] = newMusicSource.AddComponent<AudioSource>();
+            newMusicSource.transform.parent = transform;
+        }
+        audioListenerTrs = FindObjectOfType<AudioListener>().transform;
+        playerTrs = FindObjectOfType<Player>().transform;
+        library = GetComponent<SoundLibrary>();
     }
 
     void Update() {
@@ -94,6 +101,7 @@ public class AudioManager : BaseSingleton<AudioManager> {
                 mainVolumePercent = volumePercent;
                 break;
         }
-
+        //做数据的保存,存储玩家的音量偏好
+        DataManager.Instance.SaveVolumeDataByChannel(channel, volumePercent);
     }
 }

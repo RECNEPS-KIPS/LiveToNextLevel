@@ -22980,6 +22980,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a98f0c771faf7bf428d63233306aca66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainVolumePercent: 1
+  sfxVolumePercent: 0.2
+  musicVolumePercent: 1
 --- !u!114 &1320133887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23019,6 +23022,12 @@ MonoBehaviour:
   - groupID: EnemyAttack
     audioClipGroup:
     - {fileID: 8300000, guid: 3ebed2a84b17982459780b9e31c1241b, type: 3}
+  - groupID: LevelCompleted
+    audioClipGroup:
+    - {fileID: 8300000, guid: 55015593acdb3d74bbd79ec971b9fbe6, type: 3}
+  - groupID: PlayerDeath
+    audioClipGroup:
+    - {fileID: 8300000, guid: f761099a615702f4b89eaf177b098b26, type: 3}
 --- !u!1 &1329776284
 GameObject:
   m_ObjectHideFlags: 0

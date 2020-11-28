@@ -9,6 +9,12 @@ public class Gun : MonoBehaviour {
         Burst, //点射
         Single,//单点
     }
+    public enum GunType {
+        Pistol = 1,//手枪
+        Musketry = 2,//步枪
+        Submachine = 3,//冲锋枪
+    }
+    public GunType gunType;
     private int curFireModeIndex = 1;
     public int clipCount;//弹夹子弹容量
     public int clipRemainBulletCount;//当前弹夹剩余子弹数量
@@ -47,10 +53,10 @@ public class Gun : MonoBehaviour {
         bullet = Resources.Load<GameObject>("Prefabs/Common/Bullet").GetComponent<Bullet>();
         shell = Resources.Load<GameObject>("Prefabs/Common/Shell").transform;
 
-        shootAudio = Resources.Load<AudioClip>("Audio/Guns/GunShoot_1");
-        reloadAudio = Resources.Load<AudioClip>("Audio/Guns/GunReload_1");
+        shootAudio = Resources.Load<AudioClip>("Audio/Guns/GunShoot_" + (int)gunType);
+        reloadAudio = Resources.Load<AudioClip>("Audio/Guns/GunReload_" + (int)gunType);
 
-        fireMode = FireMode.Auto;
+        //fireMode = FireMode.Auto;
         shotsRemainInBurst = burstCount;
     }
 
