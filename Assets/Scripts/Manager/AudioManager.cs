@@ -4,8 +4,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
 
 public class AudioManager : BaseSingleton<AudioManager> {
+    public enum AudioChannel {
+        Main,//主音量
+        SFX,//效果音
+        Music,//音乐音量
+    }
     float mainVolumePercent = 1f;//主音量百分比
     float sfxVolumePercent = 0.2f;//特殊音效(Special Effects Cinematography)音量占比
     float musicVolumePercent = 1;//音乐音量占比
@@ -20,15 +26,19 @@ public class AudioManager : BaseSingleton<AudioManager> {
     SoundLibrary library;
 
     new void Awake() {
-        musicSources = new AudioSource[2];
-        for (var i = 0; i < 2; i++) {
-            GameObject newMusicSource = new GameObject("Music Source " + (i + 1));//创建游戏对象
-            musicSources[i] = newMusicSource.AddComponent<AudioSource>();
-            newMusicSource.transform.parent = transform;
+        if (Instance != null) {
+            Destroy(gameObject);
+        } else {
+            musicSources = new AudioSource[2];
+            for (var i = 0; i < 2; i++) {
+                GameObject newMusicSource = new GameObject("Music Source " + (i + 1));//创建游戏对象
+                musicSources[i] = newMusicSource.AddComponent<AudioSource>();
+                newMusicSource.transform.parent = transform;
+            }
+            audioListenerTrs = FindObjectOfType<AudioListener>().transform;
+            playerTrs = FindObjectOfType<Player>().transform;
+            library = GetComponent<SoundLibrary>();
         }
-        audioListenerTrs = FindObjectOfType<AudioListener>().transform;
-        playerTrs = FindObjectOfType<Player>().transform;
-        library = GetComponent<SoundLibrary>();
     }
 
     void Update() {
@@ -66,5 +76,24 @@ public class AudioManager : BaseSingleton<AudioManager> {
     //根据音频名称播放
     public void PlayAudioClip(string soundName, Vector3 pos) {
         PlayAudioClip(library.GetClipFromName(soundName), pos);
+    }
+
+    //设置音量
+    public void SetVolume(float volumePercent, AudioChannel channel) {
+        switch (channel) {
+            case AudioChannel.Main:
+                mainVolumePercent = volumePercent;
+                break;
+            case AudioChannel.SFX:
+                sfxVolumePercent = volumePercent;
+                break;
+            case AudioChannel.Music:
+                musicVolumePercent = volumePercent;
+                break;
+            default:
+                mainVolumePercent = volumePercent;
+                break;
+        }
+
     }
 }

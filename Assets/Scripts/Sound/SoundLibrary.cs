@@ -11,7 +11,7 @@ public class SoundLibrary : MonoBehaviour {
     public AudioClip GetClipFromName(string name) {
         if (groupDictionary.ContainsKey(name)) {
             AudioClip[] sounds = groupDictionary[name];
-            return sounds[Random.Range(0, sounds.Length - 1)];
+            return sounds[Random.Range(0, sounds.Length)];
         }
         return null;
     }

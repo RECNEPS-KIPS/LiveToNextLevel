@@ -23008,7 +23008,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundGroups:
   - groupID: Impact
-    audioClipGroup: []
+    audioClipGroup:
+    - {fileID: 8300000, guid: 29697dd1d418a0749a2bb994e9d6ec1d, type: 3}
+    - {fileID: 8300000, guid: 61d2bd9131d84f94fa357edb51c638ae, type: 3}
+    - {fileID: 8300000, guid: 49a8106c95c39e8469ab35eb1b2cbbd7, type: 3}
   - groupID: EnemyDeath
     audioClipGroup:
     - {fileID: 8300000, guid: bdc58c1eed163f743b65267c5bf5278c, type: 3}
