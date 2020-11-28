@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class AudioManager : BaseSingleton<AudioManager> {
     float mainVolumePercent = 1f;//主音量百分比
-    float sfxVolumePercent = 0.2f;//特技效果(Special Effects Cinematography)音量占比
+    float sfxVolumePercent = 0.2f;//特殊音效(Special Effects Cinematography)音量占比
     float musicVolumePercent = 1;//音乐音量占比
 
     //使用多个音频轨道,以便于在多个音轨上淡入淡出
@@ -16,6 +16,8 @@ public class AudioManager : BaseSingleton<AudioManager> {
     Transform playerTrs;
     Transform audioListenerTrs;
     int activeMusicSourceIndex;//激活的音轨
+
+    SoundLibrary library;
 
     new void Awake() {
         musicSources = new AudioSource[2];
@@ -26,6 +28,7 @@ public class AudioManager : BaseSingleton<AudioManager> {
         }
         audioListenerTrs = FindObjectOfType<AudioListener>().transform;
         playerTrs = FindObjectOfType<Player>().transform;
+        library = GetComponent<SoundLibrary>();
     }
 
     void Update() {
@@ -58,5 +61,10 @@ public class AudioManager : BaseSingleton<AudioManager> {
         if (clip != null) {
             AudioSource.PlayClipAtPoint(clip, pos, sfxVolumePercent * mainVolumePercent);
         }
+    }
+
+    //根据音频名称播放
+    public void PlayAudioClip(string soundName, Vector3 pos) {
+        PlayAudioClip(library.GetClipFromName(soundName), pos);
     }
 }

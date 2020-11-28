@@ -22945,6 +22945,7 @@ GameObject:
   - component: {fileID: 1320133885}
   - component: {fileID: 1320133886}
   - component: {fileID: 1320133887}
+  - component: {fileID: 1320133888}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -22993,6 +22994,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainTheme: {fileID: 0}
   menuTheme: {fileID: 0}
+--- !u!114 &1320133888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320133884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f19fd14bbd9cd464fb63c41b73f8dbcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundGroups:
+  - groupID: Impact
+    audioClipGroup: []
+  - groupID: EnemyDeath
+    audioClipGroup:
+    - {fileID: 8300000, guid: bdc58c1eed163f743b65267c5bf5278c, type: 3}
+    - {fileID: 8300000, guid: cc2a332610cf3524ba8a2e72e0b1dcd3, type: 3}
+  - groupID: EnemyAttack
+    audioClipGroup:
+    - {fileID: 8300000, guid: 3ebed2a84b17982459780b9e31c1241b, type: 3}
 --- !u!1 &1329776284
 GameObject:
   m_ObjectHideFlags: 0
