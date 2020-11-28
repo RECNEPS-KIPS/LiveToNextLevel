@@ -65,7 +65,9 @@ public class Enemy : LivingEntity {
     }
 
     public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDir) {
+        AudioManager.Instance.PlayAudioClip("Impact", transform.position);//受击音效
         if (damage >= HP) { //创建死亡特效
+            AudioManager.Instance.PlayAudioClip("EnemyDeath", transform.position);
             GameObject effectObj = GameObject.Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDir));
             effectObj.GetComponent<Renderer>().material.color = selfRenderer.material.color;//死亡特效的材质球颜色设为敌人当前皮肤色
             Destroy(effectObj, deathEffect.startLifetime);
@@ -82,6 +84,7 @@ public class Enemy : LivingEntity {
                 float sqrtDis = (target.transform.position - transform.position).sqrMagnitude;//与目标距离的平方
                 if (sqrtDis < Mathf.Pow(attackDis + selfRadius + targetRadius, 2)) {
                     nextAttackTime = Time.time + timeBetweenAttack;//为下一次攻击时间赋值,now + 攻击间隔
+                    AudioManager.Instance.PlayAudioClip("EnemyAttack", transform.position);
                     //开启攻击协程
                     StartCoroutine(Attack());
                 }
