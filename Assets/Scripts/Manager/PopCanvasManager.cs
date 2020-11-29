@@ -109,7 +109,7 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
 
     //上浮弹出框
     public void PopMessage(Vector3 pos, string msg, Color color) {
-        GameObject pop = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/UI/PopMessagePanel"), popMessageTrs);
+        GameObject pop = Instantiate<GameObject>(Resources.Load<GameObject>("UI/PopMessagePanel"), popMessageTrs);
         //print(popMessageTrs == null);
         pop.transform.localPosition = pos;
         string hexColor = ColorUtility.ToHtmlStringRGB(color);

@@ -33,6 +33,7 @@ public class Bullet : MonoBehaviour {
         float moveDistance = Time.deltaTime * speed;
         CheckCollisions(moveDistance);
         transform.Translate(Vector3.forward * moveDistance);
+        // TODO:子弹的y轴坐标固定为水平的,第三人称 
         transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
     }
 
