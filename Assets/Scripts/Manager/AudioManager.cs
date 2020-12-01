@@ -34,7 +34,7 @@ public class AudioManager : BaseSingleton<AudioManager> {
         SetVolume(0.2f, AudioChannel.SFX);
         SetVolume(1f, AudioChannel.Music);
         //加载保存的音量偏好数据
-        DataSave data = DataManager.Instance.LoadDataByType(DataManager.DataType.Audio);
+        AudioData data = DataManager.Instance.LoadDataByType<AudioData>(DataManager.DataType.Audio);
         if (data != null) {
             mainVolumePercent = data.mainVolumePercent;
             sfxVolumePercent = data.sfxVolumePercent;

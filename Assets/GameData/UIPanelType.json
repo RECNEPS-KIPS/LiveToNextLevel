@@ -1,0 +1,17 @@
+[
+    {
+        "PanelPath": "UI/FadeInOutMask",
+        "PanelType": null,
+        "PanelName": "FadeInOutMask"
+    },
+    {
+        "PanelPath": "UI/GM",
+        "PanelType": null,
+        "PanelName": "GM"
+    },
+    {
+        "PanelPath": "UI/PopMessagePanel",
+        "PanelType": null,
+        "PanelName": "PopMessagePanel"
+    }
+]

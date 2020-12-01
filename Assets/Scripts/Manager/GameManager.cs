@@ -14,6 +14,9 @@ public class GameManager : BaseSingleton<GameManager> {
     public bool gamePause = false;
     public bool isPlayerDeath = false;
 
+    public override void Awake() {
+        base.Awake();
+    }
     private void Start() {
     }
     private void Update() {

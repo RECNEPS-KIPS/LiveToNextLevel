@@ -12,13 +12,14 @@ using UnityEngine;
 public class DataManager : BaseSingleton<DataManager> {
     public enum DataType {
         Audio,
+        UIPanelType,
     }
 
     //用来保存音量数据
     public void SaveVolumeDataByChannel(AudioManager.AudioChannel channel, float value) {
-        DataSave data = LoadDataByType(DataType.Audio);//需要覆盖旧的数据,所以这里加载存在的json文件
+        AudioData data = LoadDataByType<AudioData>(DataType.Audio);//需要覆盖旧的数据,所以这里加载存在的json文件
         if (data == null) {
-            data = new DataSave();//第一次加载则创建新的对象
+            data = new AudioData();//第一次加载则创建新的对象
         }
         //print(data);
         //保存数据
@@ -46,7 +47,35 @@ public class DataManager : BaseSingleton<DataManager> {
         writer.Close();
         AssetDatabase.Refresh();
     }
-    public DataSave JSONLoadByName(string fileName) {
+
+    public void SaveUIPanelInfo(PanelInfo info) {
+        List<PanelInfo> list = LoadDataByType<List<PanelInfo>>(DataType.UIPanelType);//需要覆盖旧的数据,所以这里加载存在的json文件
+        if (list == null) {
+            list = new List<PanelInfo>();
+        }
+        string filePath = Application.dataPath + "/GameData" + "/UIPanelType.json";
+        //将对象转化为字符串
+        if (!list.Contains(info)) {
+            list.Add(info);
+        } else {
+            foreach (PanelInfo item in list) {
+                if (item.PanelName == info.PanelName) {
+                    item.PanelName = info.PanelName;
+                    item.PanelType = info.PanelType;
+                    item.PanelPath = info.PanelPath;
+                }
+            }
+        }
+        string jsonStr = JsonConvert.SerializeObject(list);
+        //print(jsonStr);
+        //将转换过后的json字符串写入json文件
+        StreamWriter writer = new StreamWriter(filePath);
+        writer.Write(jsonStr);//写入文件
+        writer.Close();
+        AssetDatabase.Refresh();
+    }
+
+    public T JSONLoadByName<T>(string fileName) {
         string filePath = Application.dataPath + "/GameData" + "/" + fileName + ".json";
         //print(filePath);
         //读取文件
@@ -55,15 +84,17 @@ public class DataManager : BaseSingleton<DataManager> {
         reader.Close();
         //Debug.Log(jsonStr);
         //字符串转换为DataSave对象
-        DataSave data = JsonConvert.DeserializeObject<DataSave>(jsonStr);
+        T data = JsonConvert.DeserializeObject<T>(jsonStr);
         return data;
     }
-    public DataSave LoadDataByType(DataType type) {
+    public T LoadDataByType<T>(DataType type) {
         switch (type) {
             case DataType.Audio:
-                return JSONLoadByName("VolumeData");
+                return JSONLoadByName<T>("VolumeData");
+            case DataType.UIPanelType:
+                return JSONLoadByName<T>("UIPanelType");
             default:
-                return JSONLoadByName("VolumeData");
+                return JSONLoadByName<T>("VolumeData");
         }
 
     }
