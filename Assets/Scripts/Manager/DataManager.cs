@@ -48,6 +48,7 @@ public class DataManager : BaseSingleton<DataManager> {
         AssetDatabase.Refresh();
     }
 
+    //在json文件中存储UIPanel面板的数据
     public void SaveUIPanelInfo(PanelInfo info) {
         List<PanelInfo> list = LoadDataByType<List<PanelInfo>>(DataType.UIPanelType);//需要覆盖旧的数据,所以这里加载存在的json文件
         if (list == null) {
@@ -55,17 +56,27 @@ public class DataManager : BaseSingleton<DataManager> {
         }
         string filePath = Application.dataPath + "/GameData" + "/UIPanelType.json";
         //将对象转化为字符串
-        if (!list.Contains(info)) {
+
+        if (list.Count == 0) {
             list.Add(info);
         } else {
-            foreach (PanelInfo item in list) {
-                if (item.PanelName == info.PanelName) {
-                    item.PanelName = info.PanelName;
-                    item.PanelType = info.PanelType;
-                    item.PanelPath = info.PanelPath;
+            for (var i = 0; i < list.Count; i++) {
+                if (list[i].PanelName == info.PanelName) {
+                    list[i].PanelName = info.PanelName;
+                    list[i].PanelType = info.PanelType;
+                    list[i].PanelPath = info.PanelPath;
+                    break;
+                    //print("here");
+                } else {
+                    if (i == list.Count - 1) {
+                        list.Add(info);
+                        print("there");
+                    }
                 }
             }
+
         }
+
         string jsonStr = JsonConvert.SerializeObject(list);
         //print(jsonStr);
         //将转换过后的json字符串写入json文件

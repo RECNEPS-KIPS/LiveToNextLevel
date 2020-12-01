@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 public class BuildPanelToJsonData : Editor {
     [MenuItem("Tools/BulidPanel", false, 3)]
     static void BulidPanelToJsonData() {
-        Debug.Log("BulidPanelToJsonData方法被执行");
+        //Debug.Log("BulidPanelToJsonData...");
         EditorUtility.DisplayProgressBar("Modify Prefab", "Please wait...", 0);//进度条
 
         if (Selection.gameObjects.Length < 1) {
@@ -25,15 +25,25 @@ public class BuildPanelToJsonData : Editor {
             string pattern = @"Resources/[\S]+/?";
             string relativePath = "";
             foreach (Match match in Regex.Matches(path, pattern)) {
-                relativePath = match.ToString().Replace("Resources/", "").Replace(".prefab", "").ToString();
+                relativePath = match.ToString().Replace("Resources/", "").Replace(".prefab", "").ToString();//获取相对路径
             }
-            PanelInfo panelInfo = new PanelInfo(relativePath, item.name);
+            int id = GetCurrentAssignableID();
+            PanelInfo panelInfo = new PanelInfo(relativePath, item.name, id);
             DataManager.Instance.SaveUIPanelInfo(panelInfo);
         }
 
         EditorUtility.ClearProgressBar();
         AssetDatabase.Refresh();
         AssetDatabase.SaveAssets();
+    }
+    static int GetCurrentAssignableID() {
+        List<PanelInfo> list = DataManager.Instance.LoadDataByType<List<PanelInfo>>(DataManager.DataType.UIPanelType);
+        if (list == null) {
+            return 1;
+        } else {
+            return list.Count + 1;
+        }
+
     }
 }
 
