@@ -70,7 +70,7 @@ public class DataManager : BaseSingleton<DataManager> {
                 } else {
                     if (i == list.Count - 1) {
                         list.Add(info);
-                        print("there");
+                        //print("there");
                     }
                 }
             }
@@ -86,6 +86,7 @@ public class DataManager : BaseSingleton<DataManager> {
         AssetDatabase.Refresh();
     }
 
+    //通过json文件名加载json文件
     public T JSONLoadByName<T>(string fileName) {
         string filePath = Application.dataPath + "/GameData" + "/" + fileName + ".json";
         //print(filePath);
@@ -98,6 +99,8 @@ public class DataManager : BaseSingleton<DataManager> {
         T data = JsonConvert.DeserializeObject<T>(jsonStr);
         return data;
     }
+
+    //通过数据type加载json数据
     public T LoadDataByType<T>(DataType type) {
         switch (type) {
             case DataType.Audio:
