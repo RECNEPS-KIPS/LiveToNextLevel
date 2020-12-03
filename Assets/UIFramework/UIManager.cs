@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManager : BaseSingleton<UIManager> {
+    private Dictionary<string, string> panelPathDict = new Dictionary<string, string>();
     public override void Awake() {
         base.Awake();
     }

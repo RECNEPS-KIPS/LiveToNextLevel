@@ -30,6 +30,7 @@ public class BuildPanelToJsonData : Editor {
             int id = GetCurrentAssignableID();
             PanelInfo panelInfo = new PanelInfo(relativePath, item.name, id);
             DataManager.Instance.SaveUIPanelInfo(panelInfo);
+
         }
 
         EditorUtility.ClearProgressBar();
