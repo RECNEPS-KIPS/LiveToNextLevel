@@ -1,3 +1,6 @@
+using UnityEngine;
+
+[System.Serializable]
 public class PanelInfo {
     private string panelPath;//面板存储的路径
     private string panelType;//面板类型
