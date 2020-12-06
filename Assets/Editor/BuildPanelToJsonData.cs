@@ -29,6 +29,7 @@ public class BuildPanelToJsonData : Editor {
             }
             int id = GetCurrentAssignableID();
             PanelInfo panelInfo = new PanelInfo(relativePath, item.name, id);
+            panelInfo.PanelType = item.GetComponent<BasePanel>().PanelType.ToString();
             DataManager.Instance.SaveUIPanelInfo(panelInfo);
 
         }
