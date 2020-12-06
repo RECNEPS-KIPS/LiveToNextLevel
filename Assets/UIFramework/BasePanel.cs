@@ -61,5 +61,25 @@ public class BasePanel : MonoBehaviour {
         return resObj;
     }
 
-    //界面生命周期流程
+    //界面生命周期流程,这里只提供虚方法,具体的逻辑由各个业务界面进行重写
+
+    //进入界面
+    public virtual void OnEnter() {
+
+    }
+
+    //暂停界面
+    public virtual void OnPause() {
+
+    }
+
+    //恢复界面
+    public virtual void OnResume() {
+
+    }
+
+    //关闭界面
+    public virtual void OnExit() {
+
+    }
 }
