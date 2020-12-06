@@ -10,6 +10,8 @@ public class UIManager : BaseSingleton<UIManager> {
     private Dictionary<int, PanelInfo> panelPathDict = new Dictionary<int, PanelInfo>();//存储UIpanel的面板和路径 字典
     private Dictionary<int, BasePanel> panelDict; //用来存储所有被实例化的panel上的BasePanel组件
     private Stack<BasePanel> panelStack;//存储显示出的ui界面的栈
+
+    private Dictionary<string, int> panelNameIDMap;//panel的名称和ID的关系映射表
     public Transform canvasTrs;
     public override void Awake() {
         base.Awake();
@@ -23,11 +25,24 @@ public class UIManager : BaseSingleton<UIManager> {
     //用来解析面板的json数据
     public void SavePanelInfoInDictByID() {
         List<PanelInfo> list = DataManager.Instance.LoadDataByType<List<PanelInfo>>(DataManager.DataType.UIPanelType);
+        if (panelNameIDMap == null) {
+            panelNameIDMap = new Dictionary<string, int>();
+        }
         for (var i = 0; i < list.Count; i++) {
             if (!panelPathDict.ContainsKey(list[i].ID)) {
                 panelPathDict.Add(list[i].ID, list[i]);
             }
+            if (!panelNameIDMap.ContainsKey(list[i].PanelName)) {
+                panelNameIDMap.Add(list[i].PanelName, list[i].ID);
+            }
         }
+    }
+
+    public int GetPanelID(string name) {
+        return panelNameIDMap[name];
+    }
+    public PanelInfo GetPanelInfo(int id) {
+        return panelPathDict[id];
     }
 
     //通过id获取panel
@@ -35,7 +50,8 @@ public class UIManager : BaseSingleton<UIManager> {
         if (panelDict == null) {
             panelDict = new Dictionary<int, BasePanel>();
         }
-        BasePanel panel = panelDict.TryGet(id);
+        BasePanel panel;
+        panelDict.TryGetValue(id, out panel);
         if (panel != null) {
             return panel;
         } else {

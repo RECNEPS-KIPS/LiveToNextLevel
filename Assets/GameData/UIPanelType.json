@@ -16,5 +16,11 @@
         "PanelType": null,
         "PanelName": "PopMessagePanel",
         "ID": 3
+    },
+    {
+        "PanelPath": "UI/DemoPanel",
+        "PanelType": null,
+        "PanelName": "DemoPanel",
+        "ID": 4
     }
 ]
