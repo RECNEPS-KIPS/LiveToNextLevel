@@ -94,10 +94,19 @@ ColorUtility.TryParseHtmlString("#FECEE1", out nowColor);//将十六进制字符
 ![image](https://github.com/RECNEPS-KIPS/LiveToNextLevel/blob/main/Assets/UIFramework/Pic/UIPanel_Life_Cycle_Flowchart.png)
 
 ### 13.UIFramework UI框架的说明
-##### 负责处理UI界面的相关模块,管理场景中的UI面板,控制面板之间的跳转逻辑,将UI的管理从GameManager中剥离出来,实现模块之间的解耦合以及界面之间的数据通信更加简洁明了便于管理
-##### UI框架实现流程:
-<1>:界面Build:将UI预制体制作好后放入Resources文件夹,使用BuildPanelToJsonData脚本将UI预制体的相关数据存储到UIPanelData.json中
-<2>:通过UIManager的SavePanelInfoInDictByID()方法将界面的信息存储到字典中,便于后续加载和访问界面数据
-<3>:构建存储当前显示界面的栈,将当前需要显示的界面入栈,关闭界面时进行出栈,即栈顶元素始终为当前显示的界面
-<4>:BasePanel:所有面板的基类,提供界面生命周期的流程接口,由业务界面进行重写
-<5>:UILauncher:负责启动UI框架
+##### 主要功能:负责处理UI界面的相关模块,管理场景中的UI面板,控制面板之间的跳转逻辑,将UI的管理从GameManager中剥离出来,实现模块之间的解耦合以及界面之间的数据通信更加简洁明了便于管理
+#### UIManager的相关说明:
+##### 功能说明:
+#####       <1>加载和显示隐藏关闭界面,根据面板唯一ID标识获得界面实例
+#####       <2>提供界面显隐的必要接口以及一些界面缓动动画
+#####       <3>界面层级,背景管理
+#####       <4>根据存储的导航信息完成界面导航,跳转功能
+#####       <5>界面通用对话框处理
+#####       <6>便于对需求的实现和功能的扩展
+
+#### UI框架实现流程:
+##### <1>:界面Build:将UI预制体制作好后放入Resources文件夹,使用BuildPanelToJsonData脚本将UI预制体的相关数据存储到UIPanelData.json中
+##### <2>:通过UIManager的SavePanelInfoInDictByID()方法将界面的信息存储到字典中,便于后续加载和访问界面数据
+##### <3>:构建存储当前显示界面的栈,将当前需要显示的界面入栈,关闭界面时进行出栈,即栈顶元素始终为当前显示的界面
+##### <4>:BasePanel:所有面板的基类,提供界面生命周期的流程接口,由业务界面进行重写
+##### <5>:UILauncher:负责启动UI框架
