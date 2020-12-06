@@ -59,7 +59,7 @@ public class UIManager : BaseSingleton<UIManager> {
         } else {
             string path = panelPathDict[id].PanelPath;
             GameObject panelObj = Resources.Load<GameObject>(path);
-            print(panelObj.name);
+            //print(panelObj.name);
             GameObject.Instantiate(panelObj, canvasTrs);//实例化
 
             panelDict.Add(id, panelObj.transform.GetComponent<BasePanel>());

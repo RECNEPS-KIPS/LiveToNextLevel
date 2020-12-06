@@ -290,7 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 0
-  panelType: 0
+  panelType: 3
   path: 
 --- !u!114 &2045269400202491876
 MonoBehaviour:

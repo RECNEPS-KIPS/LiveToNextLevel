@@ -9,17 +9,29 @@ using UnityEngine.UI;
 
 public class BasePanel : MonoBehaviour {
     // Start is called before the first frame update
-    public int ID;
-    public UIPanelType panelType;
-    public string path;
+    private int id;
+    private UIPanelType panelType;
+    private string path;
+    public int ID {
+        get { return id; }
+        set { id = value; }
+    }
+    public UIPanelType PanelType {
+        get { return panelType; }
+        set { panelType = value; }
+    }
+    public string Path {
+        get { return path; }
+        set { path = value; }
+    }
     public void Awake() {
         this.name = this.name.Replace("(Clone)", "");
     }
     void Start() {
-        ID = UIManager.Instance.GetPanelID(this.name);
-        PanelInfo info = UIManager.Instance.GetPanelInfo(ID);//得到面板的信息
+        id = UIManager.Instance.GetPanelID(this.name);
+        PanelInfo info = UIManager.Instance.GetPanelInfo(id);//得到面板的信息
         //print(info.PanelType);
-        //panelType = (UIPanelType)Enum.Parse(typeof(UIPanelType), info.PanelType);//string转枚举
+        panelType = (UIPanelType)Enum.Parse(typeof(UIPanelType), info.PanelType);//string转枚举
         path = info.PanelPath;
         InitPanel();
     }
@@ -30,6 +42,7 @@ public class BasePanel : MonoBehaviour {
 
     }
 
+    //FindObj接口列表
     public T FindObj<T>(string name) {
         return Utils.FindObj<T>(this.transform, name);
     }
@@ -47,4 +60,6 @@ public class BasePanel : MonoBehaviour {
         }
         return resObj;
     }
+
+    //界面生命周期流程
 }
