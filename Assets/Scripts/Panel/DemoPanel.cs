@@ -9,6 +9,6 @@ public class DemoPanel : BasePanel {
             Debug.Log("On Test Button Click");
         });
         //Button btn = FindObj<Button>("Button", transform);
-        print(testBtn == null);
+        //print(testBtn == null);
     }
 }

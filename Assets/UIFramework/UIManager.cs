@@ -39,14 +39,16 @@ public class UIManager : BaseSingleton<UIManager> {
     }
 
     public int GetPanelID(string name) {
+        //print(name);
         return panelNameIDMap[name];
     }
     public PanelInfo GetPanelInfo(int id) {
+        //print(panelPathDict[id].PanelType);
         return panelPathDict[id];
     }
 
     //通过id获取panel
-    public BasePanel GetPanelByID(int id) {
+    public BasePanel GetPanel(int id) {
         if (panelDict == null) {
             panelDict = new Dictionary<int, BasePanel>();
         }
@@ -57,6 +59,7 @@ public class UIManager : BaseSingleton<UIManager> {
         } else {
             string path = panelPathDict[id].PanelPath;
             GameObject panelObj = Resources.Load<GameObject>(path);
+            print(panelObj.name);
             GameObject.Instantiate(panelObj, canvasTrs);//实例化
 
             panelDict.Add(id, panelObj.transform.GetComponent<BasePanel>());
@@ -71,7 +74,7 @@ public class UIManager : BaseSingleton<UIManager> {
 
     //把panel入栈,将当前显示的panel存储到栈顶
     public void PushPanelToStack(int panelID) {
-        BasePanel panel = GetPanelByID(panelID);
+        BasePanel panel = GetPanel(panelID);
         //构造初始化的空栈
         if (panelStack == null) {
             panelStack = new Stack<BasePanel>();
@@ -80,7 +83,7 @@ public class UIManager : BaseSingleton<UIManager> {
     }
 
     //把panel出栈,将当前显示的panel出栈,关闭
-    public void PuopPanelToStack() {
+    public void PopPanelFromStack() {
 
     }
 }

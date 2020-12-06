@@ -13,25 +13,23 @@ public class BasePanel : MonoBehaviour {
     public UIPanelType panelType;
     public string path;
     public void Awake() {
+        this.name = this.name.Replace("(Clone)", "");
     }
     void Start() {
-        // ID = UIManager.Instance.GetPanelID(this.name);
-        // PanelInfo info = UIManager.Instance.GetPanelInfo(ID);//得到面板的信息
-        // panelType = (UIPanelType)Enum.Parse(typeof(UIPanelType), info.PanelType);//string转枚举
-        // path = info.PanelPath;
+        ID = UIManager.Instance.GetPanelID(this.name);
+        PanelInfo info = UIManager.Instance.GetPanelInfo(ID);//得到面板的信息
+        //print(info.PanelType);
+        //panelType = (UIPanelType)Enum.Parse(typeof(UIPanelType), info.PanelType);//string转枚举
+        path = info.PanelPath;
         InitPanel();
     }
     public virtual void InitPanel() {
-
     }
     // Update is called once per frame
     void Update() {
 
     }
 
-    public virtual void OnShowPanel() {
-        UIManager.Instance.PushPanelToStack(this.ID);
-    }
     public T FindObj<T>(string name) {
         return Utils.FindObj<T>(this.transform, name);
     }
