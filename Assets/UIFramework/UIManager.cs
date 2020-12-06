@@ -24,7 +24,7 @@ public class UIManager : BaseSingleton<UIManager> {
 
     //用来解析面板的json数据
     public void SavePanelInfoInDictByID() {
-        List<PanelInfo> list = DataManager.Instance.LoadDataByType<List<PanelInfo>>(DataManager.DataType.UIPanelType);
+        List<PanelInfo> list = DataManager.Instance.LoadDataByType<List<PanelInfo>>(DataManager.DataType.UIPanelData);
         if (panelNameIDMap == null) {
             panelNameIDMap = new Dictionary<string, int>();
         }

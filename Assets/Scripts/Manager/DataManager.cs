@@ -12,7 +12,7 @@ using UnityEngine;
 public class DataManager : BaseSingleton<DataManager> {
     public enum DataType {
         Audio,
-        UIPanelType,
+        UIPanelData,
     }
 
     //用来保存音量数据
@@ -50,11 +50,11 @@ public class DataManager : BaseSingleton<DataManager> {
 
     //在json文件中存储UIPanel面板的数据
     public void SaveUIPanelInfo(PanelInfo info) {
-        List<PanelInfo> list = LoadDataByType<List<PanelInfo>>(DataType.UIPanelType);//需要覆盖旧的数据,所以这里加载存在的json文件
+        List<PanelInfo> list = LoadDataByType<List<PanelInfo>>(DataType.UIPanelData);//需要覆盖旧的数据,所以这里加载存在的json文件
         if (list == null) {
             list = new List<PanelInfo>();
         }
-        string filePath = Application.dataPath + "/GameData" + "/UIPanelType.json";
+        string filePath = Application.dataPath + "/GameData" + "/UIPanelData.json";
         //将对象转化为字符串
 
         if (list.Count == 0) {
@@ -105,8 +105,8 @@ public class DataManager : BaseSingleton<DataManager> {
         switch (type) {
             case DataType.Audio:
                 return JSONLoadByName<T>("VolumeData");
-            case DataType.UIPanelType:
-                return JSONLoadByName<T>("UIPanelType");
+            case DataType.UIPanelData:
+                return JSONLoadByName<T>("UIPanelData");
             default:
                 return JSONLoadByName<T>("VolumeData");
         }

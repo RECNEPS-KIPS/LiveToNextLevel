@@ -39,7 +39,7 @@ public class BuildPanelToJsonData : Editor {
         AssetDatabase.SaveAssets();
     }
     static int GetCurrentAssignableID() {
-        List<PanelInfo> list = DataManager.Instance.LoadDataByType<List<PanelInfo>>(DataManager.DataType.UIPanelType);
+        List<PanelInfo> list = DataManager.Instance.LoadDataByType<List<PanelInfo>>(DataManager.DataType.UIPanelData);
         if (list == null) {
             return 1;
         } else {
