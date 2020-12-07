@@ -11,4 +11,9 @@ public class DemoPanel : BasePanel {
         //Button btn = FindObj<Button>("Button", transform);
         //print(testBtn == null);
     }
+
+    //页面暂停
+    public override void OnPause() {
+        base.OnPause();
+    }
 }

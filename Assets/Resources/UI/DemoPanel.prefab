@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 3989938700157545779}
   - component: {fileID: 1223271539161571331}
   - component: {fileID: 2045269400202491876}
+  - component: {fileID: 1738548686613180185}
   m_Layer: 5
   m_Name: DemoPanel
   m_TagString: Untagged
@@ -289,9 +290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c14aedf0a1770419971677f032c7d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
-  panelType: 3
-  path: 
 --- !u!114 &2045269400202491876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +302,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 939f9df0080637d4e8f83f2e8a7a5910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 4
-  panelType: 0
-  path: 
+--- !u!225 &1738548686613180185
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7498815650828650504}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
