@@ -26,7 +26,9 @@ public class BasePanel : MonoBehaviour {
     }
     public void Awake() {
         this.name = this.name.Replace("(Clone)", "");
+        canvasGroup = GetComponent<CanvasGroup>();
     }
+    private CanvasGroup canvasGroup;
     void Start() {
         id = UIManager.Instance.GetPanelID(this.name);
         PanelInfo info = UIManager.Instance.GetPanelInfo(id);//得到面板的信息
@@ -70,7 +72,7 @@ public class BasePanel : MonoBehaviour {
 
     //暂停界面
     public virtual void OnPause() {
-
+        canvasGroup.blocksRaycasts = false;//弹出新的面板时,鼠标和这个界面不再进行交互(禁用射线检测)
     }
 
     //恢复界面

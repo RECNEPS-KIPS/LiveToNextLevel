@@ -79,6 +79,12 @@ public class UIManager : BaseSingleton<UIManager> {
         if (panelStack == null) {
             panelStack = new Stack<BasePanel>();
         }
+        //显示当前界面时,应该先去判断当前栈是否为空,不为空说明当前有界面显示,把当前的界面OnPause掉
+        if (panelStack.Count > 0) {
+            panelStack.Peek().OnPause();
+        }
+        //每次入栈(显示页面的时候),触发panel的OnEnter方法
+        panel.OnEnter();
         panelStack.Push(panel);
     }
 
