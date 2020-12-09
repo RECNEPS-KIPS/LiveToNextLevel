@@ -58,12 +58,10 @@ public class UIManager : BaseSingleton<UIManager> {
             return panel;
         } else {
             string path = panelPathDict[id].PanelPath;
-            GameObject panelObj = Resources.Load<GameObject>(path);
             //print(panelObj.name);
-            GameObject.Instantiate(panelObj, canvasTrs);//实例化
-
+            GameObject panelObj = GameObject.Instantiate(Resources.Load<GameObject>(path), canvasTrs);//实例化
             panelDict.Add(id, panelObj.transform.GetComponent<BasePanel>());
-            return panel;
+            return panelObj.transform.GetComponent<BasePanel>();
         }
     }
 
@@ -90,6 +88,22 @@ public class UIManager : BaseSingleton<UIManager> {
 
     //把panel出栈,将当前显示的panel出栈,关闭
     public void PopPanelFromStack() {
-
+        if (panelStack == null) {
+            panelStack = new Stack<BasePanel>();
+            //print("空栈");
+        }
+        if (panelStack.Count > 0) {
+            //print("栈不为空");
+            panelStack.Pop().OnExit();//关闭栈顶界面
+            if (panelStack.Count <= 0) {
+                //print("栈空");
+                return;
+            } else {
+                //print("last panel resume");
+                panelStack.Peek().OnResume();//恢复原先的界面
+            }
+        } else {
+            return;
+        }
     }
 }
