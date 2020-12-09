@@ -24,12 +24,12 @@ public class BasePanel : MonoBehaviour {
         get { return path; }
         set { path = value; }
     }
-    public void Awake() {
-        this.name = this.name.Replace("(Clone)", "");
+    public CanvasGroup canvasGroup;
+    public virtual void Awake() {
         canvasGroup = GetComponent<CanvasGroup>();
+        this.name = this.name.Replace("(Clone)", "");
     }
-    private CanvasGroup canvasGroup;
-    void Start() {
+    public virtual void Start() {
         id = UIManager.Instance.GetPanelID(this.name);
         PanelInfo info = UIManager.Instance.GetPanelInfo(id);//得到面板的信息
         //print(info.PanelType);
@@ -40,7 +40,7 @@ public class BasePanel : MonoBehaviour {
     public virtual void InitPanel() {
     }
     // Update is called once per frame
-    void Update() {
+    public virtual void Update() {
 
     }
 
@@ -67,7 +67,6 @@ public class BasePanel : MonoBehaviour {
 
     //进入界面
     public virtual void OnEnter() {
-
     }
 
     //暂停界面
@@ -77,11 +76,16 @@ public class BasePanel : MonoBehaviour {
 
     //恢复界面
     public virtual void OnResume() {
-
+        canvasGroup.blocksRaycasts = true;
     }
 
     //关闭界面
     public virtual void OnExit() {
-
+        if (canvasGroup == null) {
+            print("return");
+            return;
+        }
+        canvasGroup.alpha = 0;
+        canvasGroup.blocksRaycasts = false;
     }
 }

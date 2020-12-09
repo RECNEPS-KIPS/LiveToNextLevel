@@ -210,9 +210,8 @@ GameObject:
   - component: {fileID: 389096073538796679}
   - component: {fileID: 6854399124428057619}
   - component: {fileID: 3989938700157545779}
-  - component: {fileID: 1223271539161571331}
-  - component: {fileID: 2045269400202491876}
-  - component: {fileID: 1738548686613180185}
+  - component: {fileID: -2307639589766618626}
+  - component: {fileID: 7133732338584412781}
   m_Layer: 5
   m_Name: DemoPanel
   m_TagString: Untagged
@@ -278,19 +277,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1223271539161571331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7498815650828650504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40c14aedf0a1770419971677f032c7d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2045269400202491876
+--- !u!114 &-2307639589766618626
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -302,7 +289,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 939f9df0080637d4e8f83f2e8a7a5910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!225 &1738548686613180185
+  canvasGroup: {fileID: 0}
+--- !u!225 &7133732338584412781
 CanvasGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
