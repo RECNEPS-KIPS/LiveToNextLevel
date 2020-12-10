@@ -67,6 +67,8 @@ public class BasePanel : MonoBehaviour {
 
     //进入界面
     public virtual void OnEnter() {
+        canvasGroup.alpha = 1;
+        canvasGroup.blocksRaycasts = true;
     }
 
     //暂停界面
