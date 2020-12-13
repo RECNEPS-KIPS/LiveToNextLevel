@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 58193230}
   - component: {fileID: 58193229}
   m_Layer: 5
-  m_Name: Button
+  m_Name: OpenDemoPanelBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
