@@ -5,7 +5,7 @@ using UnityEngine;
 public class UILauncher : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
-        UIManager.Instance.PushPanelToStack(4);
+
     }
 
     // Update is called once per frame

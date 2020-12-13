@@ -37,4 +37,7 @@ public class DemoPanel : BasePanel {
     public override void OnExit() {
         base.OnExit();
     }
+    public void OpenDemoPanel() {
+        UIManager.Instance.PushPanelToStack(4);
+    }
 }
