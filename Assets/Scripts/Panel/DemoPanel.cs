@@ -13,7 +13,6 @@ public class DemoPanel : BasePanel {
     public override void InitPanel() {
         base.InitPanel();
         Button testBtn = FindObj<Button>("Button", transform, delegate () {
-            Debug.Log("On Test Button Click");
             UIManager.Instance.PopPanelFromStack();
         });
         //Button btn = FindObj<Button>("Button", transform);

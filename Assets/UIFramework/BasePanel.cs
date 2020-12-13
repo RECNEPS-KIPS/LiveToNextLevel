@@ -26,9 +26,13 @@ public class BasePanel : MonoBehaviour {
         set { path = value; }
     }
     public CanvasGroup canvasGroup;
+    public float fadeInOutTime;//渐隐渐显time
+    public float scaleTime;//缩放time
     public virtual void Awake() {
         canvasGroup = GetComponent<CanvasGroup>();
         this.name = this.name.Replace("(Clone)", "");
+        fadeInOutTime = 0.3f;
+        scaleTime = 0.3f;
     }
     public virtual void Start() {
         id = UIManager.Instance.GetPanelID(this.name);
@@ -39,6 +43,8 @@ public class BasePanel : MonoBehaviour {
         InitPanel();
     }
     public virtual void InitPanel() {
+        transform.localScale = Vector3.zero;
+        canvasGroup.alpha = 0;
     }
     // Update is called once per frame
     public virtual void Update() {
@@ -68,7 +74,8 @@ public class BasePanel : MonoBehaviour {
 
     //进入界面
     public virtual void OnEnter() {
-        canvasGroup.alpha = 1;
+        transform.DOScale(Vector3.one, scaleTime).SetEase(Ease.InOutBack);
+        canvasGroup.DOFade(1, fadeInOutTime).SetEase(Ease.InOutBack);
         canvasGroup.blocksRaycasts = true;
     }
 
@@ -88,7 +95,10 @@ public class BasePanel : MonoBehaviour {
             print("return");
             return;
         }
-        canvasGroup.alpha = 0;
+        canvasGroup.DOFade(0, fadeInOutTime).SetEase(Ease.InOutBack);
         canvasGroup.blocksRaycasts = false;
+        transform.DOScale(Vector3.zero, scaleTime).SetEase(Ease.InOutBack).OnComplete(delegate () {
+            Debug.Log("scale tween finished");
+        });
     }
 }
