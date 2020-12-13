@@ -74,8 +74,8 @@ public class BasePanel : MonoBehaviour {
 
     //进入界面
     public virtual void OnEnter() {
-        transform.DOScale(Vector3.one, scaleTime).SetEase(Ease.InOutBack);
-        canvasGroup.DOFade(1, fadeInOutTime).SetEase(Ease.InOutBack);
+        transform.DOScale(Vector3.one, scaleTime).SetEase(Ease.InOutBack).OnComplete(() => transform.localScale = Vector3.one);
+        canvasGroup.DOFade(1, fadeInOutTime).SetEase(Ease.InOutBack).OnComplete(() => canvasGroup.alpha = 1);
         canvasGroup.blocksRaycasts = true;
     }
 
@@ -92,13 +92,10 @@ public class BasePanel : MonoBehaviour {
     //关闭界面
     public virtual void OnExit() {
         if (canvasGroup == null) {
-            print("return");
-            return;
+            canvasGroup = GetComponent<CanvasGroup>();
         }
-        canvasGroup.DOFade(0, fadeInOutTime).SetEase(Ease.InOutBack);
+        canvasGroup.DOFade(0, fadeInOutTime).SetEase(Ease.InOutBack).OnComplete(() => canvasGroup.alpha = 0);
         canvasGroup.blocksRaycasts = false;
-        transform.DOScale(Vector3.zero, scaleTime).SetEase(Ease.InOutBack).OnComplete(delegate () {
-            Debug.Log("scale tween finished");
-        });
+        transform.DOScale(Vector3.zero, scaleTime).SetEase(Ease.InOutBack).OnComplete(() => transform.localScale = Vector3.zero);
     }
 }
