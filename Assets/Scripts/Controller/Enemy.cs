@@ -63,16 +63,16 @@ public class Enemy : LivingEntity {
         hasTarget = false;
         curState = State.Idle;
     }
-
+    //重写父类的TakeHit方法
     public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDir) {
         AudioManager.Instance.PlayAudioClip("Impact", transform.position);//受击音效
         if (damage >= HP) { //创建死亡特效
             AudioManager.Instance.PlayAudioClip("EnemyDeath", transform.position);
             GameObject effectObj = GameObject.Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDir));
             effectObj.GetComponent<Renderer>().material.color = selfRenderer.material.color;//死亡特效的材质球颜色设为敌人当前皮肤色
-            Destroy(effectObj, deathEffect.main.startLifetimeMultiplier);
+            Destroy(effectObj, deathEffect.main.startLifetimeMultiplier);//死亡特效需要在播放完成后进行销毁
         }
-        base.TakeHit(damage, hitPoint, hitDir);
+        base.TakeHit(damage, hitPoint, hitDir);//这里需要调用父类LivingEntity的TakeHit方法
     }
 
     // Update is called once per frame
@@ -143,7 +143,7 @@ public class Enemy : LivingEntity {
             yield return new WaitForSeconds(refreshRate);
         }
     }
-
+    //设置敌人的属性,按照传进来的参数
     public void SetCharacter(float moveSpeed, int hitsTimes, float enemyHP, Color skin) {
         //print(enemyHP);
         pathFinder.speed = moveSpeed;

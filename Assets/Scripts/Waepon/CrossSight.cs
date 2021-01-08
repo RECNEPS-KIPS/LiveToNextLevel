@@ -8,7 +8,7 @@ public class CrossSight : MonoBehaviour {
     public Color dotOriColor;//中心点的原始颜色
     public Color dotHeightColor;//中心点高光颜色
     void Start() {
-        Cursor.visible = false;
+        Cursor.visible = false;//将鼠标指针隐藏掉
         dot = Utils.FindObj<Transform>(transform, "Dot");
         dotSpriteRenderer = dot.GetComponent<SpriteRenderer>();
         dotSpriteRenderer.color = dotOriColor;
@@ -26,8 +26,8 @@ public class CrossSight : MonoBehaviour {
         if (Physics.Raycast(ray, 100, targetLayer)) {//检测到目标中心点高亮
             dotSpriteRenderer.color = dotHeightColor;
         } else {
-            dotSpriteRenderer.color = dotOriColor;
+            dotSpriteRenderer.color = dotOriColor;//将颜色重置为默认的颜色值
         }
-        
+
     }
 }

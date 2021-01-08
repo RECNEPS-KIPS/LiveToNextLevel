@@ -39,7 +39,7 @@ public class Gun : MonoBehaviour {
     public float recoilTrsRecoverTime = 0.1f;//后坐力位移恢复时间
     public float recoilAngleRecoverTime = 0.1f;//后坐力旋转恢复时间
     bool triggerRelease;//标识扳机是否释放
-    public float reloadTime = 0.1f;
+    public float reloadTime = 0.1f;//装填时间
     bool isClipReloading;//是否正在重新装填弹药
 
     //处理音频的变量

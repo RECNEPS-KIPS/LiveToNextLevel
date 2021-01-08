@@ -48,9 +48,9 @@ public class MapGenerator : MonoBehaviour {
     /// </summary>
     public void GenerateMap() {
         currentMap = maps[mapIndex];
-        currentMap.seed = Random.Range(-100, 100);
+        currentMap.seed = Random.Range(-100, 100);//随机种子
         tileMap = new Transform[currentMap.mapSize.x, currentMap.mapSize.y];
-        System.Random random = new System.Random(currentMap.seed);
+        System.Random random = new System.Random(currentMap.seed);//生成随机数
         GetComponent<BoxCollider>().size = new Vector3(currentMap.mapSize.x * tileSize, 0.05f, currentMap.mapSize.y * tileSize);
 
         //存储地图坐标数据
@@ -96,7 +96,7 @@ public class MapGenerator : MonoBehaviour {
                 Vector3 obsPos = CoordToPosition(randomCoord.x, randomCoord.y);
                 //实例化,缩放,位置,父节点,旋转角度
                 Transform newObs = Instantiate(obsPrefab, obsPos + Vector3.up * obsHeight / 2, Quaternion.identity) as Transform;
-                newObs.parent = mapHolder;
+                newObs.parent = mapHolder;//将生成的障碍物挂载带mapHolder节点下面
                 newObs.localScale = new Vector3((1 - outlinePercent) * tileSize, obsHeight, (1 - outlinePercent) * tileSize);
 
                 //渐变色插值
