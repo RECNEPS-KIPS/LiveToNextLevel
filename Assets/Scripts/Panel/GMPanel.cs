@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GMPanel : MonoBehaviour
-{
+public class GMPanel : BasePanel {
+    public override void Awake() {
+        showTween = true;
+    }
     // Start is called before the first frame update
-    void Start()
-    {
-        
+    public override void Start() {
+
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
+    public override void Update() {
+
     }
 }

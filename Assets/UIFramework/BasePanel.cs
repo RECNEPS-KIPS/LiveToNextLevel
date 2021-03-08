@@ -28,6 +28,7 @@ public class BasePanel : MonoBehaviour {
     public CanvasGroup canvasGroup;
     public float fadeInOutTime;//渐隐渐显time
     public float scaleTime;//缩放time
+    public bool showTween = false;
     public virtual void Awake() {
         canvasGroup = GetComponent<CanvasGroup>();
         this.name = this.name.Replace("(Clone)", "");
@@ -43,8 +44,14 @@ public class BasePanel : MonoBehaviour {
         InitPanel();
     }
     public virtual void InitPanel() {
-        transform.localScale = Vector3.zero;
-        canvasGroup.alpha = 0;
+        if (showTween) {
+            transform.localScale = Vector3.zero;
+            canvasGroup.alpha = 0;
+
+        } else {
+            transform.localScale = Vector3.one;
+            canvasGroup.alpha = 1;
+        }
     }
     // Update is called once per frame
     public virtual void Update() {
@@ -74,8 +81,10 @@ public class BasePanel : MonoBehaviour {
 
     //进入界面
     public virtual void OnEnter() {
-        transform.DOScale(Vector3.one, scaleTime).SetEase(Ease.InOutBack).OnComplete(() => transform.localScale = Vector3.one);
-        canvasGroup.DOFade(1, fadeInOutTime).SetEase(Ease.InOutBack).OnComplete(() => canvasGroup.alpha = 1);
+        if (showTween) {
+            transform.DOScale(Vector3.one, scaleTime).SetEase(Ease.InOutBack).OnComplete(() => transform.localScale = Vector3.one);
+            canvasGroup.DOFade(1, fadeInOutTime).SetEase(Ease.InOutBack).OnComplete(() => canvasGroup.alpha = 1);
+        }
         canvasGroup.blocksRaycasts = true;
     }
 
@@ -94,8 +103,10 @@ public class BasePanel : MonoBehaviour {
         if (canvasGroup == null) {
             canvasGroup = GetComponent<CanvasGroup>();
         }
-        canvasGroup.DOFade(0, fadeInOutTime).SetEase(Ease.InOutBack).OnComplete(() => canvasGroup.alpha = 0);
+        if (showTween) {
+            canvasGroup.DOFade(0, fadeInOutTime).SetEase(Ease.InOutBack).OnComplete(() => canvasGroup.alpha = 0);
+            transform.DOScale(Vector3.zero, scaleTime).SetEase(Ease.InOutBack).OnComplete(() => transform.localScale = Vector3.zero);
+        }
         canvasGroup.blocksRaycasts = false;
-        transform.DOScale(Vector3.zero, scaleTime).SetEase(Ease.InOutBack).OnComplete(() => transform.localScale = Vector3.zero);
     }
 }

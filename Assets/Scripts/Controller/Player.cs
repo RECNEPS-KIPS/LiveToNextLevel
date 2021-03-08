@@ -7,12 +7,15 @@ using UnityEngine;
 public class Player : LivingEntity {
     public float moveSpeed = 5;
     public Camera viewCamera;
-    private PlayerController playerController;
-    private GunController gunController;
+    public PlayerController playerController;
+    public GunController gunController;
     public Transform crossSightTrs;//十字瞄具
     float gunHeight;//持有武器的高度
     public CrossSight crossSight;
     public Spawner spawner;
+    public float switchColdTime = 0f;
+    public float switchColdRemainTime = 2f;
+    public bool hasTips = false;
 
     protected override void Awake() {
         base.Awake();
@@ -33,7 +36,8 @@ public class Player : LivingEntity {
     }
 
     // Update is called once per frame
-    void Update() {
+    protected override void Update() {
+        base.Update();
         //处理移动输入模块
         Vector3 moveInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         Vector3 moveVelocity = moveInput.normalized * moveSpeed;
@@ -68,8 +72,18 @@ public class Player : LivingEntity {
             gunController.ReloadClip();
         }
         if (Input.GetKeyDown(KeyCode.X)) {
-            gunController.SwitchFireMode();
+            if (switchColdTime <= 0) {
+                switchColdTime = 2f;
+                gunController.SwitchFireMode();
+                hasTips = false;
+            } else {
+                if (!hasTips) {
+                    FindObjectOfType<PopCanvasManager>().PopMessage(Vector3.zero, "切换冷却中", Color.white);
+                    hasTips = true;
+                }
+            }
         }
+        switchColdTime -= Time.deltaTime;
     }
 
     /// <summary>

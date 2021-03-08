@@ -22,6 +22,7 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
         spawner.OnNewWave += OnNewWave;
     }
     void Start() {
+        //print("pop canvas");
         popMessageTrs = Utils.FindObj<Transform>(transform, "PopMessageTrs");
         fadePanel = transform.Find("FadeInOutMask").transform;
         fadeMask = fadePanel.GetComponent<Image>();
@@ -109,9 +110,10 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
 
     //上浮弹出框
     public void PopMessage(Vector3 pos, string msg, Color color) {
+        //print(msg);
         GameObject pop = Instantiate<GameObject>(Resources.Load<GameObject>("UI/PopMessagePanel"), popMessageTrs);
-        //print(popMessageTrs == null);
         pop.transform.localPosition = pos;
+        pop.transform.localScale = Vector3.one;
         string hexColor = ColorUtility.ToHtmlStringRGB(color);
         string addColorMsg = "<color=#" + hexColor + ">" + msg + "</color>";
         Text txt = Utils.FindObj<Text>(pop.transform, "Text");
@@ -119,7 +121,7 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
 
         //fade out
         CanvasGroup canvas = Utils.FindObj<CanvasGroup>(pop.transform, null);
-        StartCoroutine(PopMessagePanelFadeAndPop(pop, canvas, 1f, 50));
+        StartCoroutine(PopMessagePanelFadeAndPop(pop, canvas, 0.5f, 50));
     }
     //popTips渐隐上浮协程
     IEnumerator PopMessagePanelFadeAndPop(GameObject pop, CanvasGroup canvas, float fadeTime, float moveSpeed) {
@@ -128,6 +130,7 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
         Destroy(pop, fadeTime + 0.5f);
         float fadeSpeed = 1 / fadeTime;
         while (percent < 1) {
+            //print(percent);
             y += Time.deltaTime * fadeSpeed * moveSpeed;
             pop.transform.localPosition = new Vector3(0, y, 0);
             percent += Time.deltaTime * fadeSpeed;

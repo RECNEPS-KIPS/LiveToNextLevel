@@ -76,7 +76,7 @@ public class Enemy : LivingEntity {
     }
 
     // Update is called once per frame
-    void Update() {
+    protected override void Update() {
         if (hasTarget) {
             //当前时间大于下一次攻击时间
             if (Time.time > nextAttackTime && target != null) {

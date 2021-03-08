@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DemoPanel : BasePanel {
     public override void Awake() {
         base.Awake();
+        showTween = true;
     }
     public override void Start() {
         base.Start();

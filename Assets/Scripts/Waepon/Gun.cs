@@ -182,6 +182,7 @@ public class Gun : MonoBehaviour {
         } else {
             str = FireModeToName(fireMode);
         }
+        //print(str);
         FindObjectOfType<PopCanvasManager>().PopMessage(Vector3.zero, "切换到" + str + "模式", Color.white);
     }
     /// <summary>

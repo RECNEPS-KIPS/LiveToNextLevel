@@ -13,6 +13,8 @@ public class LivingEntity : MonoBehaviour, IDamageable {
     protected virtual void Awake() {
         dead = false;
     }
+    protected virtual void Update() {
+    }
     protected virtual void Start() {
         HP = startHP;
     }
