@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5763993364190086597}
   - component: {fileID: 5763993364190086594}
   - component: {fileID: 2832977417515194898}
+  - component: {fileID: -5259651851858117240}
   m_Layer: 5
   m_Name: FadeInOutMask
   m_TagString: Untagged
@@ -89,9 +90,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c14aedf0a1770419971677f032c7d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
-  panelType: 3
-  path: 
+  canvasGroup: {fileID: 0}
+  fadeInOutTime: 0
+  scaleTime: 0
+--- !u!225 &-5259651851858117240
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5763993364190086592}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5763993364213876428
 GameObject:
   m_ObjectHideFlags: 0

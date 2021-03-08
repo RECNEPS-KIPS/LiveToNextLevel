@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 6021917655161420690}
   - component: {fileID: -4551443428416386781}
   - component: {fileID: -9055011481091860637}
-  - component: {fileID: -3963396092468275207}
   - component: {fileID: 4093923524969909454}
+  - component: {fileID: -3330133230912195168}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -129,24 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc3197b3d46f484a91b7463dde91d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-3963396092468275207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2025535762975087622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2c7d858f0be3fc40bf4bca42d3bdd01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startHP: 5000
-  moveSpeed: 5
-  viewCamera: {fileID: 0}
-  crossSightTrs: {fileID: 0}
-  crossSight: {fileID: 0}
-  spawner: {fileID: 0}
 --- !u!114 &4093923524969909454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,6 +149,26 @@ MonoBehaviour:
   - {fileID: 6682914429113341176, guid: 8b81753d5598edd409e02e3f23940f27, type: 3}
   - {fileID: 3857422730533548385, guid: 5a4d213d6c2020d4ea67d01b7243ee0a, type: 3}
   weaponHolder: {fileID: 4694509147465023561}
+--- !u!114 &-3330133230912195168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025535762975087622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c7d858f0be3fc40bf4bca42d3bdd01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startHP: 200
+  moveSpeed: 7
+  viewCamera: {fileID: 0}
+  playerController: {fileID: 0}
+  gunController: {fileID: 0}
+  crossSightTrs: {fileID: 0}
+  crossSight: {fileID: 0}
+  spawner: {fileID: 0}
 --- !u!1 &5966612266009408218
 GameObject:
   m_ObjectHideFlags: 0
