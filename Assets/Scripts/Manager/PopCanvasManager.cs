@@ -103,7 +103,7 @@ public class PopCanvasManager : MonoBehaviour { //BaseSingleton<PopCanvasManager
     void PlayAgain() {
         //print("play again");
         SceneManager.LoadScene("Game");
-        GameManager.Instance.isPlayerDeath = false;
+        ModuleManager.Instance.isPlayerDeath = false;
 
         fadePanel.gameObject.SetActive(false);
     }

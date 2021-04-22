@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
     /// </summary>
     /// <param name="point"></param>
     public void LookAt(Vector3 point) {
-        if (!GameManager.Instance.gamePause) {
+        if (!ModuleManager.Instance.gamePause) {
             transform.LookAt(new Vector3(point.x, this.transform.position.y, point.z));
         }
     }

@@ -14,23 +14,39 @@ public class BasePanel : MonoBehaviour {
     private UIPanelType panelType;
     private string path;
     public int ID {
-        get { return id; }
-        set { id = value; }
+        get {
+            return id;
+        }
+        set {
+            id = value;
+        }
     }
     public UIPanelType PanelType {
-        get { return panelType; }
-        set { panelType = value; }
+        get {
+            return panelType;
+        }
+        set {
+            panelType = value;
+        }
     }
     public string Path {
         get { return path; }
         set { path = value; }
     }
-    public CanvasGroup canvasGroup;
+    private CanvasGroup canvasGroup;
+
+    public CanvasGroup CanvasGroup {
+        get {
+            if (canvasGroup == null) {
+                canvasGroup = GetComponent<CanvasGroup>();
+            }
+            return canvasGroup;
+        }
+    }
     public float fadeInOutTime;//渐隐渐显time
     public float scaleTime;//缩放time
     public bool showTween = false;
     public virtual void Awake() {
-        canvasGroup = GetComponent<CanvasGroup>();
         this.name = this.name.Replace("(Clone)", "");
         fadeInOutTime = 0.3f;
         scaleTime = 0.3f;
@@ -46,11 +62,11 @@ public class BasePanel : MonoBehaviour {
     public virtual void InitPanel() {
         if (showTween) {
             transform.localScale = Vector3.zero;
-            canvasGroup.alpha = 0;
+            CanvasGroup.alpha = 0;
 
         } else {
             transform.localScale = Vector3.one;
-            canvasGroup.alpha = 1;
+            CanvasGroup.alpha = 1;
         }
     }
     // Update is called once per frame
@@ -83,30 +99,27 @@ public class BasePanel : MonoBehaviour {
     public virtual void OnEnter() {
         if (showTween) {
             transform.DOScale(Vector3.one, scaleTime).SetEase(Ease.InOutBack).OnComplete(() => transform.localScale = Vector3.one);
-            canvasGroup.DOFade(1, fadeInOutTime).SetEase(Ease.InOutBack).OnComplete(() => canvasGroup.alpha = 1);
+            CanvasGroup.DOFade(1, fadeInOutTime).SetEase(Ease.InOutBack).OnComplete(() => CanvasGroup.alpha = 1);
         }
-        canvasGroup.blocksRaycasts = true;
+        CanvasGroup.blocksRaycasts = true;
     }
 
     //暂停界面
     public virtual void OnPause() {
-        canvasGroup.blocksRaycasts = false;//弹出新的面板时,鼠标和这个界面不再进行交互(禁用射线检测)
+        CanvasGroup.blocksRaycasts = false;//弹出新的面板时,鼠标和这个界面不再进行交互(禁用射线检测)
     }
 
     //恢复界面
     public virtual void OnResume() {
-        canvasGroup.blocksRaycasts = true;
+        CanvasGroup.blocksRaycasts = true;
     }
 
     //关闭界面
     public virtual void OnExit() {
-        if (canvasGroup == null) {
-            canvasGroup = GetComponent<CanvasGroup>();
-        }
         if (showTween) {
-            canvasGroup.DOFade(0, fadeInOutTime).SetEase(Ease.InOutBack).OnComplete(() => canvasGroup.alpha = 0);
+            CanvasGroup.DOFade(0, fadeInOutTime).SetEase(Ease.InOutBack).OnComplete(() => CanvasGroup.alpha = 0);
             transform.DOScale(Vector3.zero, scaleTime).SetEase(Ease.InOutBack).OnComplete(() => transform.localScale = Vector3.zero);
         }
-        canvasGroup.blocksRaycasts = false;
+        CanvasGroup.blocksRaycasts = false;
     }
 }

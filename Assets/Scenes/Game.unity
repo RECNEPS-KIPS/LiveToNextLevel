@@ -1863,7 +1863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 758902429674694418, guid: 0b3a75bc542cf744aac41611d8f37365, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 758902429674694418, guid: 0b3a75bc542cf744aac41611d8f37365, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5464,65 +5464,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295111782}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &295837572 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2787105219273688142, guid: 0a55806cc16afb648b90803d5ead3478, type: 3}
-  m_PrefabInstance: {fileID: 4026476795608802810}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &295837574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 295837572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 295837575}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &295837575 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6401615903360104386, guid: 0a55806cc16afb648b90803d5ead3478, type: 3}
-  m_PrefabInstance: {fileID: 4026476795608802810}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 295837572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &315444934
 GameObject:
   m_ObjectHideFlags: 0
@@ -9621,7 +9562,7 @@ GameObject:
   - component: {fileID: 545591976}
   - component: {fileID: 545591975}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: ModuleManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9636,7 +9577,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 545591974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6416b805f9ef70940974a9af1ef144ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 7939b043886924d4694656ce18ca2c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DEVELOP_MODE: 0
@@ -29186,6 +29127,9 @@ MonoBehaviour:
   crossSightTrs: {fileID: 0}
   crossSight: {fileID: 0}
   spawner: {fileID: 0}
+  switchColdTime: 0
+  switchColdRemainTime: 2
+  hasTips: 0
 --- !u!1 &1770359983
 GameObject:
   m_ObjectHideFlags: 0
@@ -34109,10 +34053,6 @@ PrefabInstance:
     - target: {fileID: 4026476793940530777, guid: 0a55806cc16afb648b90803d5ead3478, type: 3}
       propertyPath: m_Name
       value: GM
-      objectReference: {fileID: 0}
-    - target: {fileID: 4026476793940530777, guid: 0a55806cc16afb648b90803d5ead3478, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4026476794182995324, guid: 0a55806cc16afb648b90803d5ead3478, type: 3}
       propertyPath: m_LocalPosition.x

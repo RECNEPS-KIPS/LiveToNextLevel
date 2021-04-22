@@ -53,7 +53,7 @@ public class Spawner : MonoBehaviour {
             }
         }
         //开发者模式下按回车直接跳过这一波
-        if (GameManager.Instance.DEVELOP_MODE) {
+        if (ModuleManager.Instance.DEVELOP_MODE) {
             if (Input.GetKeyDown(KeyCode.Return)) {
                 StopCoroutine("SpawnerEnemy");//停止生成敌人协程
                 //销毁当前波的敌人
@@ -110,7 +110,7 @@ public class Spawner : MonoBehaviour {
     void OnPlayerDeath() {
         Cursor.visible = true;
         isDisable = true;
-        GameManager.Instance.isPlayerDeath = true;
+        ModuleManager.Instance.isPlayerDeath = true;
     }
 
     /// <summary>
